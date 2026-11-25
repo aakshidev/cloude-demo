@@ -243,6 +243,20 @@ nav.l{flex-wrap:wrap;justify-content:center;overflow:visible}
 nav a{padding:4px 10px;font-size:.85rem}
 }
 
+
+/* account view */
+a.acirc{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;text-decoration:none;background:var(--card);color:var(--mute);border:2px solid var(--line);font:600 1.3rem/1 "Cormorant Garamond",Georgia,serif;margin-left:6px}
+a.acirc.in2{background:var(--acc);border-color:var(--acc);color:var(--on)}
+a.acirc.on{outline:3px solid var(--line);outline-offset:2px}
+.views>#account{overflow-y:auto;overscroll-behavior:contain}
+#account>.in{margin:auto;width:100%}
+.acrow{display:flex;align-items:center;gap:16px}
+.av2{flex:none;width:56px;height:56px;border-radius:50%;background:var(--acc);color:var(--on);display:grid;place-items:center;font:600 1.9rem/1 "Cormorant Garamond",Georgia,serif}
+.acrow b{display:block;overflow-wrap:anywhere}
+.acl{margin:22px 0 4px;display:grid;gap:0}
+.acl div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+.acl dt{color:var(--mute)}.acl dd{margin:0;font-weight:600;text-align:right}
+
 /* upcoming-2027 project announcement */
 .ann{flex:none;position:relative;z-index:10;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 12px;padding:9px 4vw;text-align:center;text-decoration:none;color:#fff;font-size:.92rem;line-height:1.35;background:linear-gradient(90deg,#17304f,#3f6fa8,#17304f);background-size:200% 100%;animation:annsh 6s linear infinite}
 .ann b{font-weight:600}
@@ -437,33 +451,6 @@ input[type=number]{width:110px}
 #qbanner[hidden]{display:none}
 body.quiet .ann{display:none}
 @media(max-width:600px){.dhd,.dbd,.dft{padding-left:18px;padding-right:18px}}
-
-/* profile menu + edit profile */
-.hr{position:relative}
-#hprof{position:relative}
-#hmenu[hidden]{display:none!important}
-.av{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--acc) center/cover no-repeat;color:var(--on);font-weight:600;flex:none;overflow:hidden}
-.av.lg{width:84px;height:84px;font:600 2.2rem/1 "Cormorant Garamond",Georgia,serif}
-.pbtn{display:grid;place-items:center;padding:2px;border:2px solid var(--line);border-radius:50%;background:var(--card);cursor:pointer}
-.pbtn:hover{border-color:var(--acc)}
-.pmenu{position:absolute;right:0;top:calc(100% + 10px);width:min(260px,calc(100vw - 24px));background:var(--card);border:1px solid var(--line);border-radius:18px;padding:8px;box-shadow:0 18px 50px -18px rgba(23,48,79,.5);z-index:20}
-.pwho{padding:10px 12px;border-bottom:1px solid var(--line);margin-bottom:6px;overflow-wrap:anywhere;line-height:1.35}
-.pwho b{display:block}.pwho span{color:var(--mute);font-size:.85rem}
-.pmenu button{display:block;width:100%;text-align:left;background:none;border:0;border-radius:12px;padding:10px 12px;cursor:pointer}
-.pmenu button[hidden]{display:none}.pmenu button:hover:not(:disabled){background:var(--sky)}.pmenu button:disabled{opacity:.45;cursor:not-allowed}#hdel{color:#b3261e}
-#uxd{border:1px solid var(--line);border-radius:28px;background:var(--card);color:var(--ink);padding:clamp(22px,4vw,36px);width:min(480px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;box-shadow:0 30px 80px -20px rgba(23,48,79,.45)}
-#uxd::backdrop{background:rgba(23,48,79,.45);backdrop-filter:blur(4px)}
-#uxd h2{font-size:clamp(2rem,6vw,2.4rem)}
-#uxd [hidden]{display:none!important}
-.uxav{display:flex;align-items:center;gap:16px;margin:18px 0 4px}
-.uxav .sbtns{margin:0}
-.btn.sm{padding:9px 18px;font-size:.92rem}
-.btn.dng{background:#b3261e;color:#fff}
-.btn.ghost.dng{background:transparent;color:#b3261e;border:1.5px solid #b3261e}
-.uxdz{margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
-.uxdz h3{font-size:1.4rem}
-#uxconf{margin-top:14px;padding:14px 16px;border-radius:14px;background:#fdecea;border:1px solid #f1b8b3}
-#uxconf p{margin:0 0 4px;color:#7a1712}
 </style>
 </head>
 <body>
@@ -472,12 +459,9 @@ body.quiet .ann{display:none}
 <header>
 <a class="logo" href="#home" aria-label="Cloude home"><img id="mark" alt="">Cloude.</a>
 <nav class="l" aria-label="Sections">
-<a href="#actions">Actions</a><a class="m" href="#faq">FAQ</a><a href="#insights">Research insights</a><a href="#workshops">Workshops</a><a href="#cloudee">Cloudee</a>
+<a href="#actions">Actions</a><a class="m" href="#sync">Health sync</a><a class="m" href="#faq">FAQ</a><a href="#insights">Research insights</a><a href="#workshops">Workshops</a><a href="#cloudee">Cloudee</a>
 </nav>
-<div class="hr"><nav class="r" aria-label="More"><a href="#faq">FAQ</a></nav>
-<div id="hprof"><button type="button" class="pbtn" id="hbtn" aria-haspopup="menu" aria-expanded="false" aria-controls="hmenu" aria-label="Account menu"><span class="av" id="hav"></span></button>
-<div class="pmenu" id="hmenu" role="menu" hidden><div class="pwho"><b id="hnm"></b><span id="hem"></span></div>
-<button type="button" role="menuitem" id="hchat2" hidden>Talk to Cloudee</button><button type="button" role="menuitem" id="hedit">Edit profile</button><button type="button" role="menuitem" id="hout">Sign out</button><button type="button" role="menuitem" id="hdel">Delete account</button></div></div></div>
+<div class="hr"><nav class="r" aria-label="More"><a href="#sync">Health sync</a><a href="#faq">FAQ</a></nav><a class="acirc" id="hacc" href="#account" aria-label="Account" title="Account">?</a></div>
 </header>
 <div class="shell">
 <div class="views">
@@ -500,7 +484,7 @@ body.quiet .ann{display:none}
 </div></div></div>
 
 <div id="assess" class="assess"><div class="in" style="max-width:980px">
-<h2 style="text-align:center">Climate check-in <span class="soon ver"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#fff"/><path d="M6.5 12.5l4 4 7-8" fill="none" stroke="#1f9d55" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span></h2>
+<h2 style="text-align:center">Dashboard <span class="soon ver"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#fff"/><path d="M6.5 12.5l4 4 7-8" fill="none" stroke="#1f9d55" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span></h2>
 <div id="checkin" style="max-width:820px;margin:0 auto">
 <p class="lead">Take the two-minute check-in to see your climate pulse: your anxiety level and what sets it off.</p>
 <div class="card" style="margin-top:28px">
@@ -544,18 +528,17 @@ body.quiet .ann{display:none}
 <div class="grid2" style="align-items:start">
 <div>
 <svg viewBox="0 0 100 110" width="100" aria-hidden="true"><path d="M50 6 12 20v30c0 26 16 44 38 54 22-10 38-28 38-54V20z" fill="var(--acc)"/><path d="M34 54l12 12 22-24" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<h2 style="margin-top:14px">Your Cloude account</h2>
-<p class="mute">Sign in to talk with Cloudee, your calm companion for climate worries. Your account keeps your name and photo in one place, and you can edit it or delete it any time from the profile menu.</p>
+<h2 style="margin-top:14px">Link your medical history</h2>
+<p class="mute"><b>What is Health sync?</b> Health sync is an optional connection between your health portal and Cloude. When you turn it on and sign in to your portal, Cloude can read your medical history, such as existing conditions and past care, and use it to tailor the steps it suggests to your health instead of giving general advice. It is off by default, only works with your consent, and you can switch it off and delete your linked history any time.</p>
+<label class="switch" style="margin-top:18px"><input type="checkbox" id="consent"><span class="track"></span>Allow linking my medical history</label>
 </div>
 <div class="card" id="sform">
-<div id="sAuth"><h3>Sign in to Cloude</h3><p class="mute" style="margin:0">Use your Cloude account, or create one in a few seconds.</p>
-<form id="aform" novalidate><fieldset id="afields">
+<div id="sAuth"><h3>Sign in to Cloude</h3><p class="mute" style="margin:0">Step 1 of 2. Use your Cloude account.</p>
+<form id="aform" novalidate><fieldset id="afields" class="off" disabled>
 <label class="f" for="aem">Account email</label><input type="email" id="aem" autocomplete="email" required>
 <label class="f" for="apw">Password</label><input type="password" id="apw" autocomplete="current-password" required>
 <div class="sbtns"><button class="btn">Sign in</button><button class="btn ghost" type="button" id="asignup">Create account</button></div>
 </fieldset></form><p id="amsg" role="status" class="ok"></p></div>
-<div id="sChat" hidden><h3>Welcome<span id="cwho"></span></h3><p class="mute" style="margin:0">Cloudee is ready whenever you are. Tell it what’s on your mind.</p>
-<div class="sbtns"><a class="btn" href="#cloudee">Talk to Cloudee</a><button class="btn ghost" type="button" data-out>Sign out</button></div></div>
 <div id="sPortal" hidden><h3>Connect your health portal</h3><p class="mute" style="margin:0">Step 2 of 2. Signed in as <b id="who"></b>. Encrypted connection.</p>
 <form id="pform" novalidate><fieldset id="sfields" class="off" disabled>
 <label class="f" for="fn">First name</label><input type="text" id="fn" autocomplete="given-name" required>
@@ -570,13 +553,22 @@ body.quiet .ann{display:none}
 <p class="mute" id="snote" style="font-size:.85rem;margin-top:14px"></p>
 </div></div></div></section>
 
+<section id="account" aria-label="Your account"><div class="in" style="max-width:720px">
+<h2>Your account</h2>
+<p class="lead">Your profile and what Cloude has saved for you.</p>
+<div class="card" style="margin-top:24px">
+<div class="acrow"><span class="av2" id="acav" aria-hidden="true">?</span><div><b id="acem"></b><p class="mute" id="acst" style="margin:0"></p></div></div>
+<dl class="acl"><div><dt>Health sync</dt><dd id="achs"></dd></div><div><dt>Data storage</dt><dd id="acmode"></dd></div></dl>
+<div class="sbtns"><a class="btn" href="#dash">Open dashboard</a><a class="btn ghost" href="#sync" id="acsync">Manage Health sync</a><button class="btn ghost" type="button" data-out id="acout">Sign out</button></div>
+</div></div></section>
+
 <section id="report" class="alt" aria-label="Your personalised checkup"><div class="in" id="rbody" style="max-width:1000px"></div></section>
 <section id="faq" class="alt"><div class="in" style="max-width:760px">
 <h2>Questions</h2>
-<details><summary>Is my data private?</summary><p>Your check-in answers stay on your device. Your account only holds your profile details, and you can delete your account any time.</p></details>
+<details><summary>Is my data private?</summary><p>Your check-in answers stay in this page. If you choose to sync your medical history, it is saved to your Cloude profile and you can delete it any time.</p></details>
 <details><summary>Is this a medical test?</summary><p>No. It's a self-reflection tool to help you notice patterns. It can't diagnose or treat anxiety.</p></details>
 <details><summary>What if I feel worse?</summary><p>Pause, try the grounding exercise, and reach out to someone you trust or a health professional.</p></details>
-
+<details><summary>Do I have to link my medical history?</summary><p>No. Everything else works without it.</p></details>
 </div></section>
 
 
@@ -661,7 +653,7 @@ body.quiet .ann{display:none}
 <dialog id="welcome" aria-labelledby="wtitle">
 <img id="wimg" alt="">
 <h2 id="wtitle">Welcome to Cloude</h2>
-<p class="wp">A calm place to check in with how climate news affects you. It takes two minutes, needs no account, and you can stop at any point.</p>
+<p class="wp">A calm place to check in with how climate news affects you. It takes two minutes and you can stop at any point.</p>
 <div class="wb"><button class="btn" id="wgo">Get started</button></div>
 </dialog>
 
@@ -675,23 +667,6 @@ body.quiet .ann{display:none}
 <p class="mute" style="font-size:.85rem;margin:6px 0 0">PDFs and images are read on your device. Only the items you keep ticked are uploaded.</p>
 <div class="wb" style="margin-top:20px"><button class="btn" id="upl">Upload medical history</button></div><p class="ok" id="umsg" role="status"></p></div>
 <div id="sp3" hidden><p class="wp">Your medical history is on your Cloude profile. Your personalised checkup is ready.</p><div class="wb"><button class="btn" id="viewrep">View my personalised checkup</button></div></div>
-</dialog>
-<dialog id="uxd" aria-labelledby="uxtitle">
-<h2 id="uxtitle">Edit profile</h2>
-<form id="uxform" novalidate>
-<div class="uxav"><span class="av lg" id="uxav"></span><div class="sbtns"><button type="button" class="btn ghost sm" id="uxpick">Change photo</button><button type="button" class="btn ghost sm" id="uxrem">Remove</button></div></div>
-<input type="file" id="uxfile" accept="image/png,image/jpeg,image/webp" hidden>
-<label class="f" for="uxname">Display name</label><input type="text" id="uxname" maxlength="60" autocomplete="name">
-<label class="f" for="uxmail">Email</label><input type="email" id="uxmail" autocomplete="email">
-<label class="f" for="uxpass">New password <span class="mute">(optional)</span></label><input type="password" id="uxpass" autocomplete="new-password">
-<p id="uxmsg" role="status" class="ok"></p>
-<div class="sbtns"><button class="btn">Save changes</button><button type="button" class="btn ghost" id="uxcancel">Cancel</button></div>
-</form>
-<div class="uxdz"><h3>Account</h3>
-<div class="sbtns" style="margin-top:12px"><button type="button" class="btn ghost" id="uxout">Sign out</button><button type="button" class="btn ghost dng" id="uxdel">Delete account</button></div>
-<div id="uxconf" hidden><p><b>Delete your account?</b></p><p>This permanently removes your account, your profile and any synced medical history. It can’t be undone.</p>
-<div class="sbtns"><button type="button" class="btn dng" id="uxdel2">Yes, delete everything</button><button type="button" class="btn ghost" id="uxdel3">Keep my account</button></div></div>
-</div>
 </dialog>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
@@ -746,14 +721,13 @@ function gdraw(){
 $("gnext").onclick=()=>{gi++;gdraw()};
 /* ===== Health sync ===== */
 // 1) Paste your Supabase project URL and anon (public) key here. Leave empty to run in demo mode.
-const SUPABASE_URL="",SUPABASE_ANON_KEY="";
+const SUPABASE_URL="https://seggtcscckgzhbafkeie.supabase.co",SUPABASE_ANON_KEY="sb_publishable_5TsD9nzzdLB84R3ADgSyJA_JHCU-KD0";
+// Where your login page (index.html) lives. People who are not signed in are sent here, and Sign out returns here. Example: "/index.html" or "https://your-login-site.com/"
+const LOGIN_URL="";
 const sb=(SUPABASE_URL&&SUPABASE_ANON_KEY&&window.supabase)?supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
 const esc=x=>String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const LS={g:k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},s:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},d:k=>{try{localStorage.removeItem(k)}catch(e){}}};
 const DEMO_HISTORY=["Asthma","Anxiety","Seasonal allergies","Poor sleep"];
-// Account deletion in Supabase mode needs this one-time SQL function (a browser cannot delete its own auth user):
-//    create or replace function delete_account() returns void language sql security definer set search_path=public as $$ delete from auth.users where id = auth.uid(); $$;
-//    grant execute on function delete_account() to authenticated;
 // 2) Backend adapter. Supabase mode uses: auth (email+password), rpc portal_login(p_email,p_password) -> jsonb array of conditions,
 //    and table medical_history(user_id uuid primary key, history jsonb, updated_at timestamptz).
 const B={
@@ -763,36 +737,32 @@ const B={
   const a=LS.g("cd_acc_"+e);if(!a)throw new Error("No account found. Use Create account.");if(a.p!==p)throw new Error("Wrong email or password.");LS.s("cd_user",{email:e,id:e})},
  async signUp(e,p){if(sb){const{data,error}=await sb.auth.signUp({email:e,password:p});if(error)throw error;return !!data.session}
   LS.s("cd_acc_"+e,{p});LS.s("cd_user",{email:e,id:e});return true},
+ async profile(u){if(!sb)return null;try{const{data}=await sb.from("profiles").select("*").eq("id",u.id).maybeSingle();return data||null}catch(e){return null}},
  async signOut(){if(sb)await sb.auth.signOut();else LS.d("cd_user")},
  async portal(f){if(sb){const{data,error}=await sb.rpc("portal_login",{p_email:f.email,p_password:f.pw});if(error||!data)throw new Error("Portal sign-in failed. Check your details.");return Array.isArray(data)?data:(data.conditions||[])}
   await new Promise(r=>setTimeout(r,600));return DEMO_HISTORY},
  async save(u,h){if(sb){const{error}=await sb.from("medical_history").upsert({user_id:u.id,history:h,updated_at:new Date().toISOString()},{onConflict:"user_id"});if(error)throw error;return}LS.s("cd_hist_"+u.id,h)},
  async load(u){if(sb){const{data}=await sb.from("medical_history").select("history").eq("user_id",u.id).maybeSingle();return data?data.history:null}return LS.g("cd_hist_"+u.id)},
- async wipe(u){if(sb){await sb.from("medical_history").delete().eq("user_id",u.id)}else LS.d("cd_hist_"+u.id)},
- async profile(u){if(sb){const m=u.user_metadata||{};return{name:m.name||"",pfp:m.pfp||""}}const p=LS.g("cd_prof_"+u.id)||{};return{name:p.name||"",pfp:p.pfp||""}},
- async saveProfile(u,f){
-  if(sb){const a={data:{name:f.name,pfp:f.pfp}};if(f.email&&f.email!==u.email)a.email=f.email;if(f.password)a.password=f.password;
-   const{error}=await sb.auth.updateUser(a);if(error)throw error;return{emailPending:!!a.email}}
-  let id=u.id;const acc=LS.g("cd_acc_"+u.email)||{};if(f.password)acc.p=f.password;
-  if(f.email&&f.email!==u.email){
-   if(LS.g("cd_acc_"+f.email))throw new Error("That email already has an account.");
-   const h=LS.g("cd_hist_"+u.id);LS.d("cd_acc_"+u.email);LS.d("cd_prof_"+u.id);LS.d("cd_hist_"+u.id);
-   id=f.email;if(h)LS.s("cd_hist_"+id,h);LS.s("cd_user",{email:id,id})}
-  LS.s("cd_acc_"+id,acc);LS.s("cd_prof_"+id,{name:f.name,pfp:f.pfp});return{}},
- async deleteAccount(u){
-  await B.wipe(u);
-  if(sb){const{error}=await sb.rpc("delete_account");if(error)throw new Error("Could not delete the account. Please try again.");await sb.auth.signOut();return}
-  LS.d("cd_acc_"+u.email);LS.d("cd_prof_"+u.id);LS.d("cd_user")}
+ async wipe(u){if(sb){await sb.from("medical_history").delete().eq("user_id",u.id)}else LS.d("cd_hist_"+u.id)}
 };
 let U=null,H=null,P=null,items=[];
 async function renderSync(){
- try{U=await B.user();H=U?await B.load(U):null}catch(e){H=null}
- $("sAuth").hidden=!!U;$("sChat").hidden=!U;$("sPortal").hidden=true;$("sDone").hidden=true;
+ try{U=await B.user();H=U?await B.load(U):null;P=U?await B.profile(U):null}catch(e){H=null}
+ $("sAuth").hidden=!!U;$("sPortal").hidden=!U||!!H;$("sDone").hidden=!H;
  if(U){$("who").textContent=U.email;if(!$("em").value)$("em").value=U.email}
  if(H)$("dsum").textContent=H.length+(H.length==1?" item":" items")+" synced";
- $("snote").textContent=B.live?"":"Demo mode: Supabase is not connected yet, so accounts stay in this browser only.";
- try{P=U?await B.profile(U):null}catch(e){P=null}
- drawProfile();setTimeout(fit,40)}
+ $("snote").textContent=B.live?"Your records are saved to your Cloude profile. You can delete them any time.":"Demo mode: Supabase is not connected yet, so data stays in this browser only.";
+ renderAccount();
+ setTimeout(fit,40)}
+function renderAccount(){
+ const e=U&&U.email,nm=P&&P.full_name,lab=nm||e;
+ $("acem").textContent=lab||"Not signed in";$("acav").textContent=lab?lab[0].toUpperCase():"?";
+ $("acst").textContent=e?(nm?e:"Signed in"):"Sign in from Health sync to save your history to a profile.";
+ $("achs").textContent=H?H.length+(H.length==1?" item":" items")+" synced":"Not linked";
+ $("acmode").textContent=B.live?"Your Cloude profile":"Demo mode, this browser only";
+ const hc=$("hacc");hc.textContent=lab?lab[0].toUpperCase():"?";hc.classList.toggle("in2",!!e);hc.title=e?"Signed in as "+(nm?nm+" ("+e+")":e):"Not signed in";hc.setAttribute("aria-label",e?"Account: signed in as "+e:"Account: not signed in");
+ $("acout").hidden=!U;$("acsync").textContent=U?"Manage Health sync":"Sign in"}
+$("consent").onchange=e=>{["afields","sfields"].forEach(i=>{const f=$(i);f.disabled=!e.target.checked;f.classList.toggle("off",!e.target.checked)});$("amsg").textContent=$("smsg").textContent=""};
 async function auth(up){const e=$("aem").value.trim(),p=$("apw").value,m=$("amsg");
  if(!e||p.length<6){m.textContent="Enter your email and a password of at least 6 characters.";return}
  m.textContent="Please wait…";
@@ -800,56 +770,7 @@ async function auth(up){const e=$("aem").value.trim(),p=$("apw").value,m=$("amsg
   m.textContent="";$("apw").value="";await renderSync()}catch(x){m.textContent=x.message||"Something went wrong."}}
 $("aform").onsubmit=e=>{e.preventDefault();auth(false)};
 $("asignup").onclick=()=>auth(true);
-document.querySelectorAll("[data-out]").forEach(b=>b.onclick=async()=>{await B.signOut();await renderSync()});
-/* profile menu + edit profile */
-const PFP_OK=/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/;
-function setAv(el,pfp,name){el.style.backgroundImage=pfp&&PFP_OK.test(pfp)?'url("'+pfp+'")':"";el.textContent=pfp&&PFP_OK.test(pfp)?"":(name||"?").trim().charAt(0).toUpperCase()}
-function drawProfile(){
- $("hout").disabled=$("hdel").disabled=!U;$("hchat2").hidden=!U;
- if(!U){setAv($("hav"),"","?");$("hnm").textContent="Guest";$("hem").textContent="Not signed in";$("hedit").textContent="Sign in to edit profile";return}
- $("hedit").textContent="Edit profile";
- const n=(P&&P.name)||"";
- setAv($("hav"),P&&P.pfp,n||U.email);$("hnm").textContent=n||"Your profile";$("hem").textContent=U.email;
- $("who").textContent=n?n+" ("+U.email+")":U.email;$("cwho").textContent=n?", "+n:""}
-function closeMenu(){$("hmenu").hidden=true;$("hbtn").setAttribute("aria-expanded","false")}
-$("hbtn").onclick=e=>{e.stopPropagation();const open=$("hmenu").hidden;$("hmenu").hidden=!open;$("hbtn").setAttribute("aria-expanded",String(open))};
-addEventListener("click",e=>{if(!e.target.closest("#hprof"))closeMenu()});
-addEventListener("keydown",e=>{if(e.key=="Escape")closeMenu()});
-$("hchat2").onclick=()=>{closeMenu();show("cloudee")};
-$("hout").onclick=async()=>{closeMenu();await B.signOut();await renderSync()};
-let npfp="";
-const umsg=t=>$("uxmsg").textContent=t;
-function drawUxAv(){setAv($("uxav"),npfp,$("uxname").value.trim()||(U&&U.email))}
-$("hedit").onclick=()=>{closeMenu();if(!U){show("sync");return}
- $("uxname").value=(P&&P.name)||"";$("uxmail").value=U.email;$("uxpass").value="";umsg("");$("uxconf").hidden=true;
- npfp=(P&&P.pfp)||"";drawUxAv();$("uxd").showModal()};
-$("hdel").onclick=()=>{$("hedit").click();$("uxconf").hidden=false};
-$("uxname").oninput=drawUxAv;
-$("uxpick").onclick=()=>$("uxfile").click();
-$("uxrem").onclick=()=>{npfp="";drawUxAv()};
-function shrink(f){return new Promise((res,rej)=>{const u=URL.createObjectURL(f),im=new Image();
- im.onload=()=>{const z=128,c=document.createElement("canvas");c.width=c.height=z;const x=c.getContext("2d"),m=Math.min(im.width,im.height);
-  x.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,z,z);URL.revokeObjectURL(u);res(c.toDataURL("image/jpeg",.8))};
- im.onerror=()=>{URL.revokeObjectURL(u);rej(new Error("bad image"))};im.src=u})}
-$("uxfile").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
- if(!/^image\/(png|jpe?g|webp)$/.test(f.type)){umsg("Choose a PNG, JPG or WebP image.");return}
- try{npfp=await shrink(f);umsg("");drawUxAv()}catch(x){umsg("Could not read that image.")}};
-$("uxform").onsubmit=async e=>{e.preventDefault();
- const name=$("uxname").value.trim(),email=$("uxmail").value.trim(),pw=$("uxpass").value;
- if(!/^\S+@\S+\.\S+$/.test(email)){umsg("Enter a valid email address.");return}
- if(pw&&pw.length<6){umsg("A new password needs at least 6 characters.");return}
- umsg("Saving…");
- try{const r=await B.saveProfile(U,{name,pfp:npfp,email,password:pw});await renderSync();
-  if(r.emailPending){umsg("Saved. Check your new email to confirm the change.");return}
-  $("uxd").close()}catch(x){umsg(x.message||"Something went wrong.")}};
-$("uxcancel").onclick=()=>$("uxd").close();
-$("uxout").onclick=async()=>{$("uxd").close();await B.signOut();await renderSync()};
-$("uxdel").onclick=()=>{$("uxconf").hidden=false;$("uxdel2").focus()};
-$("uxdel3").onclick=()=>{$("uxconf").hidden=true};
-$("uxdel2").onclick=async()=>{
- try{await B.deleteAccount(U)}catch(x){umsg(x.message||"Could not delete the account.");return}
- $("uxd").close();H=null;await renderSync();show("home")};
-
+document.querySelectorAll("[data-out]").forEach(b=>b.onclick=async()=>{await B.signOut();await renderSync();if(LOGIN_URL)location.href=LOGIN_URL});
 $("pform").onsubmit=async e=>{e.preventDefault();
  if(!["fn","ln","em","pw"].every(i=>$(i).value.trim())){$("smsg").textContent="Fill in every field to connect.";return}
  $("smsg").textContent="Signing in to your portal…";let list;
@@ -926,8 +847,8 @@ function drawReport(){
  if(hist.length){const last=hist[hist.length-1],prev=hist[hist.length-2],d=prev?prev.p-last.p:null,mx=100;
   imp=`${d==null?'<p class="mute">First check-in saved. Retake it in a week to see your trend.</p>':`<p class="big" style="font-size:2.6rem">${d>0?"↓ ":d<0?"↑ ":""}${Math.abs(d)} pts</p><p class="${d>0?"ok":"mute"}">${d>0?"Anxiety is down since your last check-in. Nice work.":d<0?"Anxiety is up since last time. Be gentle with yourself and lean on the plan.":"No change since last check-in. Steady is fine."}</p>`}
   <svg class="tr" viewBox="0 0 ${hist.length*44+8} 90" role="img" aria-label="Anxiety level across check-ins">${hist.map((x,i)=>`<rect x="${i*44+8}" y="${80-x.p*.7}" width="30" height="${x.p*.7}" rx="8" class="${i==hist.length-1?"b1":"b0"}"/><text x="${i*44+23}" y="${74-x.p*.7}" text-anchor="middle" class="bt">${x.p}</text>`).join("")}</svg>`}
- $("rbody").innerHTML=`<h2>Your personalised checkup</h2><p class="lead">Checkup, improvement and progress in one place. Built from your medical history${U?" and account":""}${res?" and your check-in":""}. It is guidance, not a diagnosis.</p>
- ${res?"":'<div class="tip" style="margin-top:16px">Add your anxiety score: <a href="#dash"><b>take the two-minute check-in</b></a>, then reopen this checkup.</div>'}
+ $("rbody").innerHTML=`<h2>Your health dashboard</h2><p class="lead">Checkup, improvement and progress in one place. Built from your medical history${U?" and account":""}${res?" and your check-in":""}. It is guidance, not a diagnosis.</p>
+ ${res?"":'<div class="tip" style="margin-top:16px">Add your anxiety score: <a href="#dash"><b>take the two-minute check-in</b></a>, then reopen this dashboard.</div>'}
  <div class="dg"><div class="card cc"><h3>Wellness score</h3>${ring(ov,"Wellness score",lvl==="Low"?"Steady":lvl==="Moderate"?"Watch":"Care")}<p class="mute">Higher is better. Combines check-in and history.</p></div>
  <div class="card cc"><h3>Improvement</h3>${imp}</div>
  <div class="card cc"><h3>Plan progress</h3><div class="big" id="tot">0%</div><p class="mute">Plan and kit combined</p><div class="bar" style="margin:10px 0 0"><i id="pbar"></i></div><p class="mute" id="ptxt" style="font-size:.9rem;margin:6px 0 0"></p></div></div>
@@ -1099,7 +1020,7 @@ $("cq").innerHTML=CQ.map(x=>`<button type="button">${x}</button>`).join("");
 $("cq").onclick=e=>{if(e.target.tagName=="BUTTON")send(e.target.textContent)};
 btn.onclick=()=>send(inp.value);inp.onkeydown=e=>{if(e.key=="Enter")send(inp.value)};
 })();
-renderSync();
+renderSync().then(()=>{if(B.live&&!U&&LOGIN_URL)location.replace(LOGIN_URL)});
 const links=[...document.querySelectorAll("nav a")];
 drawQ();
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1126,15 +1047,15 @@ if(!RM){
  });
 }
 
-function fit(){document.querySelectorAll(".views>section.on:not(#home):not(#insights):not(#cloudee):not(#report)>.in").forEach(el=>{
+function fit(){document.querySelectorAll(".views>section.on:not(#home):not(#insights):not(#cloudee):not(#report):not(#account)>.in").forEach(el=>{
  const p=el.parentElement,c=getComputedStyle(p),avail=p.clientHeight-parseFloat(c.paddingTop)-parseFloat(c.paddingBottom);
  let z=1;el.style.zoom=z;
  for(let i=0;i<4;i++){const h=el.getBoundingClientRect().height;if(h<=avail)break;z=Math.max(.5,z*avail/h*.98);el.style.zoom=z}
 })}
 function show(id){
-  const tgt=id=="how"?"how":id=="dash"?"assess":null,jump=!!tgt;if(jump)id="home";
+  const orig=id,tgt=id=="how"?"how":id=="dash"?"assess":null,jump=!!tgt;if(jump)id="home";
   document.querySelectorAll(".views>section").forEach(s=>s.classList.toggle("on",s.id==id));
-  links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")=="#"+(id=="report"?"sync":id)));
+  links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")=="#"+(orig=="report"?"sync":orig)));
   fit();
   const h=$("home");
   if(jump)h.scrollTo({top:$(tgt).offsetTop,behavior:RM?"auto":"smooth"});
