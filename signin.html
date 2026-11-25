@@ -251,6 +251,13 @@ a.acirc.on{outline:3px solid var(--line);outline-offset:2px}
 .views>#account{overflow-y:auto;overscroll-behavior:contain}
 #account>.in{margin:auto;width:100%}
 .acrow{display:flex;align-items:center;gap:16px}
+.btn.danger{background:transparent;color:#a62d2d;border:1.5px solid #a62d2d}
+.btn.danger.solid{background:#a62d2d;color:#fff}
+.hsprompt{margin-top:18px;padding:16px 18px;border-radius:16px;background:var(--sky);border:1px solid var(--line)}
+.hsprompt p{margin:0 0 10px}
+.dzone{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+dialog#delacc{max-width:min(440px,92vw);border:1px solid var(--line);border-radius:24px;background:var(--card);color:var(--ink);padding:0}
+dialog#delacc::backdrop{background:rgba(23,48,79,.45)}
 .av2{flex:none;width:56px;height:56px;border-radius:50%;background:var(--acc);color:var(--on);display:grid;place-items:center;font:600 1.9rem/1 "Cormorant Garamond",Georgia,serif}
 .acrow b{display:block;overflow-wrap:anywhere}
 .acl{margin:22px 0 4px;display:grid;gap:0}
@@ -559,7 +566,9 @@ body.quiet .ann{display:none}
 <div class="card" style="margin-top:24px">
 <div class="acrow"><span class="av2" id="acav" aria-hidden="true">?</span><div><b id="acem"></b><p class="mute" id="acst" style="margin:0"></p></div></div>
 <dl class="acl"><div><dt>Health sync</dt><dd id="achs"></dd></div><div><dt>Data storage</dt><dd id="acmode"></dd></div></dl>
+<div class="hsprompt" id="achsp" hidden><p><b>You're not using Health sync yet.</b> <span class="mute">Link your medical history so Cloude can tailor its suggestions to you. It's optional and you can switch it off any time.</span></p><a class="btn" href="#sync" id="acuse">Use Health sync</a></div>
 <div class="sbtns"><a class="btn" href="#dash">Open dashboard</a><a class="btn ghost" href="#sync" id="acsync">Manage Health sync</a><button class="btn ghost" type="button" data-out id="acout">Sign out</button></div>
+<div class="dzone" id="acdz" hidden><button class="btn danger" type="button" id="acdel">Delete account</button><p class="mute" style="font-size:.85rem;margin:8px 0 0">Permanently removes your account and any synced medical history.</p></div>
 </div></div></section>
 
 <section id="report" class="alt" aria-label="Your personalised checkup"><div class="in" id="rbody" style="max-width:1000px"></div></section>
@@ -618,6 +627,12 @@ body.quiet .ann{display:none}
 </div>
 </div>
 
+<dialog id="delacc" aria-labelledby="datitle"><div style="padding:28px">
+<h2 id="datitle">Delete your account?</h2>
+<p>This permanently deletes your Cloude account and any synced medical history. This can't be undone.</p>
+<label class="f" for="dacpw">Type DELETE to confirm</label><input type="text" id="dacpw" autocomplete="off">
+<p id="damsg" role="status" class="ok" style="min-height:1.4em"></p>
+<div class="row"><button class="btn ghost" type="button" id="dacno">Cancel</button><button class="btn danger solid" type="button" id="dacyes" disabled>Delete account</button></div></div></dialog>
 <dialog id="dcons" aria-labelledby="dctitle"><div style="padding:28px">
 <h2 id="dctitle">Allow Digital detox?</h2>
 <p>Digital detox will manage your screen time on this device. It tracks the time on the apps you choose, sends you reminders and limit alerts, and applies your quiet hours. Your browser will also ask to show notifications.</p>
@@ -743,7 +758,11 @@ const B={
   await new Promise(r=>setTimeout(r,600));return DEMO_HISTORY},
  async save(u,h){if(sb){const{error}=await sb.from("medical_history").upsert({user_id:u.id,history:h,updated_at:new Date().toISOString()},{onConflict:"user_id"});if(error)throw error;return}LS.s("cd_hist_"+u.id,h)},
  async load(u){if(sb){const{data}=await sb.from("medical_history").select("history").eq("user_id",u.id).maybeSingle();return data?data.history:null}return LS.g("cd_hist_"+u.id)},
- async wipe(u){if(sb){await sb.from("medical_history").delete().eq("user_id",u.id)}else LS.d("cd_hist_"+u.id)}
+ async wipe(u){if(sb){await sb.from("medical_history").delete().eq("user_id",u.id)}else LS.d("cd_hist_"+u.id)},
+ // Deletes history, profile and the login itself. Supabase needs the delete_user() SQL function (see the note in the reply) because the browser cannot delete an auth user directly.
+ async deleteAccount(u){if(sb){await sb.from("medical_history").delete().eq("user_id",u.id);try{await sb.from("profiles").delete().eq("id",u.id)}catch(e){}
+   const{error}=await sb.rpc("delete_user");if(error)throw new Error("Could not delete the account. Please try again.");try{await sb.auth.signOut()}catch(e){}return}
+  LS.d("cd_hist_"+u.id);LS.d("cd_acc_"+u.email);LS.d("cd_user")}
 };
 let U=null,H=null,P=null,items=[];
 async function renderSync(){
@@ -761,7 +780,7 @@ function renderAccount(){
  $("achs").textContent=H?H.length+(H.length==1?" item":" items")+" synced":"Not linked";
  $("acmode").textContent=B.live?"Your Cloude profile":"Demo mode, this browser only";
  const hc=$("hacc");hc.textContent=lab?lab[0].toUpperCase():"?";hc.classList.toggle("in2",!!e);hc.title=e?"Signed in as "+(nm?nm+" ("+e+")":e):"Not signed in";hc.setAttribute("aria-label",e?"Account: signed in as "+e:"Account: not signed in");
- $("acout").hidden=!U;$("acsync").textContent=U?"Manage Health sync":"Sign in"}
+ $("acout").hidden=!U;$("acdz").hidden=!U;$("achsp").hidden=!U||!!H;$("acsync").hidden=!!U&&!H;$("acsync").textContent=U?"Manage Health sync":"Sign in"}
 $("consent").onchange=e=>{["afields","sfields"].forEach(i=>{const f=$(i);f.disabled=!e.target.checked;f.classList.toggle("off",!e.target.checked)});$("amsg").textContent=$("smsg").textContent=""};
 async function auth(up){const e=$("aem").value.trim(),p=$("apw").value,m=$("amsg");
  if(!e||p.length<6){m.textContent="Enter your email and a password of at least 6 characters.";return}
@@ -771,6 +790,15 @@ async function auth(up){const e=$("aem").value.trim(),p=$("apw").value,m=$("amsg
 $("aform").onsubmit=e=>{e.preventDefault();auth(false)};
 $("asignup").onclick=()=>auth(true);
 document.querySelectorAll("[data-out]").forEach(b=>b.onclick=async()=>{await B.signOut();await renderSync();if(LOGIN_URL)location.href=LOGIN_URL});
+const dad=$("delacc");
+$("acdel").onclick=()=>{$("dacpw").value="";$("dacyes").disabled=true;$("damsg").textContent="";dad.showModal();$("dacpw").focus()};
+$("dacpw").oninput=e=>{$("dacyes").disabled=e.target.value.trim()!=="DELETE"};
+$("dacno").onclick=()=>dad.close();
+dad.addEventListener("click",e=>{if(e.target===dad)dad.close()});
+$("dacyes").onclick=async()=>{if(!U||$("dacpw").value.trim()!=="DELETE")return;
+ $("dacyes").disabled=true;$("damsg").textContent="Deleting…";
+ try{await B.deleteAccount(U);dad.close();await renderSync();show("home");if(LOGIN_URL)location.href=LOGIN_URL}
+ catch(x){$("damsg").textContent=x.message||"Something went wrong.";$("dacyes").disabled=false}};
 $("pform").onsubmit=async e=>{e.preventDefault();
  if(!["fn","ln","em","pw"].every(i=>$(i).value.trim())){$("smsg").textContent="Fill in every field to connect.";return}
  $("smsg").textContent="Signing in to your portal…";let list;
