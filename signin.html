@@ -251,6 +251,11 @@ a.acirc.on{outline:3px solid var(--line);outline-offset:2px}
 .views>#account{overflow-y:auto;overscroll-behavior:contain}
 #account>.in{margin:auto;width:100%}
 .acrow{display:flex;align-items:center;gap:16px}
+.av2,a.acirc{background-size:cover;background-position:center}
+.av2.img,a.acirc.img{color:transparent;font-size:0}
+.pedit{margin-top:18px;display:grid;gap:10px}
+.pedit .sbtns{margin-top:4px}
+.pedit .btn{padding:9px 20px;font-size:.95rem}
 .btn.danger{background:transparent;color:#a62d2d;border:1.5px solid #a62d2d}
 .btn.danger.solid{background:#a62d2d;color:#fff}
 .hsprompt{margin-top:18px;padding:16px 18px;border-radius:16px;background:var(--sky);border:1px solid var(--line)}
@@ -468,7 +473,7 @@ body.quiet .ann{display:none}
 <nav class="l" aria-label="Sections">
 <a href="#actions">Actions</a><a class="m" href="#sync">Health sync</a><a class="m" href="#faq">FAQ</a><a href="#insights">Research insights</a><a href="#workshops">Workshops</a><a href="#cloudee">Cloudee</a>
 </nav>
-<div class="hr"><nav class="r" aria-label="More"><a href="#sync">Health sync</a><a href="#faq">FAQ</a></nav><a class="acirc" id="hacc" href="#account" aria-label="Account" title="Account">?</a></div>
+<div class="hr"><nav class="r" aria-label="More"><a href="#sync">Health sync</a><a href="#faq">FAQ</a><a href="index.html">Landing page</a></nav><a class="acirc" id="hacc" href="#account" aria-label="Account" title="Account">?</a></div>
 </header>
 <div class="shell">
 <div class="views">
@@ -565,9 +570,15 @@ body.quiet .ann{display:none}
 <p class="lead">Your profile and what Cloude has saved for you.</p>
 <div class="card" style="margin-top:24px">
 <div class="acrow"><span class="av2" id="acav" aria-hidden="true">?</span><div><b id="acem"></b><p class="mute" id="acst" style="margin:0"></p></div></div>
+<div class="pedit" id="acedit" hidden>
+<label class="f" for="acname" style="margin-top:0">Display name</label>
+<input type="text" id="acname" maxlength="40" autocomplete="name" placeholder="Your name">
+<div class="sbtns"><button class="btn" type="button" id="acsave">Save name</button><button class="btn ghost" type="button" id="acpick">Change photo</button><button class="btn ghost" type="button" id="acrmpic" hidden>Remove photo</button></div>
+<input type="file" id="acfile" accept="image/*" hidden>
+<p id="acemsg" role="status" class="ok" style="margin:0;min-height:1.4em"></p></div>
 <dl class="acl"><div><dt>Health sync</dt><dd id="achs"></dd></div><div><dt>Data storage</dt><dd id="acmode"></dd></div></dl>
 <div class="hsprompt" id="achsp" hidden><p><b>You're not using Health sync yet.</b> <span class="mute">Link your medical history so Cloude can tailor its suggestions to you. It's optional and you can switch it off any time.</span></p><a class="btn" href="#sync" id="acuse">Use Health sync</a></div>
-<div class="sbtns"><a class="btn" href="#dash">Open dashboard</a><a class="btn ghost" href="#sync" id="acsync">Manage Health sync</a><button class="btn ghost" type="button" data-out id="acout">Sign out</button></div>
+<div class="sbtns"><a class="btn ghost" href="index.html" id="aclanding">Back to landing page</a><a class="btn" href="#sync" id="acsync">Manage Health sync</a><button class="btn ghost" type="button" data-out id="acout">Sign out</button></div>
 <div class="dzone" id="acdz" hidden><button class="btn danger" type="button" id="acdel">Delete account</button><p class="mute" style="font-size:.85rem;margin:8px 0 0">Permanently removes your account and any synced medical history.</p></div>
 </div></div></section>
 
@@ -753,6 +764,9 @@ const B={
  async signUp(e,p){if(sb){const{data,error}=await sb.auth.signUp({email:e,password:p});if(error)throw error;return !!data.session}
   LS.s("cd_acc_"+e,{p});LS.s("cd_user",{email:e,id:e});return true},
  async profile(u){if(!sb)return null;try{const{data}=await sb.from("profiles").select("*").eq("id",u.id).maybeSingle();return data||null}catch(e){return null}},
+ async setName(u,n){if(sb){const{error}=await sb.auth.updateUser({data:{full_name:n}});if(error)throw error;try{await sb.from("profiles").upsert({id:u.id,full_name:n},{onConflict:"id"})}catch(e){}return}LS.s("cd_name_"+u.id,n)},
+ pic(u){return LS.g("cd_pfp_"+u.id)},
+ setPic(u,d){if(d)LS.s("cd_pfp_"+u.id,d);else LS.d("cd_pfp_"+u.id)},
  async signOut(){if(sb)await sb.auth.signOut();else LS.d("cd_user")},
  async portal(f){if(sb){const{data,error}=await sb.rpc("portal_login",{p_email:f.email,p_password:f.pw});if(error||!data)throw new Error("Portal sign-in failed. Check your details.");return Array.isArray(data)?data:(data.conditions||[])}
   await new Promise(r=>setTimeout(r,600));return DEMO_HISTORY},
@@ -762,7 +776,7 @@ const B={
  // Deletes history, profile and the login itself. Supabase needs the delete_user() SQL function (see the note in the reply) because the browser cannot delete an auth user directly.
  async deleteAccount(u){if(sb){await sb.from("medical_history").delete().eq("user_id",u.id);try{await sb.from("profiles").delete().eq("id",u.id)}catch(e){}
    const{error}=await sb.rpc("delete_user");if(error)throw new Error("Could not delete the account. Please try again.");try{await sb.auth.signOut()}catch(e){}return}
-  LS.d("cd_hist_"+u.id);LS.d("cd_acc_"+u.email);LS.d("cd_user")}
+  LS.d("cd_hist_"+u.id);LS.d("cd_acc_"+u.email);LS.d("cd_user");LS.d("cd_pfp_"+u.id);LS.d("cd_name_"+u.id)}
 };
 let U=null,H=null,P=null,items=[];
 async function renderSync(){
@@ -774,8 +788,10 @@ async function renderSync(){
  renderAccount();
  setTimeout(fit,40)}
 function renderAccount(){
- const e=U&&U.email,nm=P&&P.full_name,lab=nm||e;
+ const e=U&&U.email,nm=(P&&P.full_name)||(U&&((U.user_metadata&&U.user_metadata.full_name)||LS.g("cd_name_"+U.id)))||"",lab=nm||e,pic=U?B.pic(U):null;
  $("acem").textContent=lab||"Not signed in";$("acav").textContent=lab?lab[0].toUpperCase():"?";
+ [$("acav"),$("hacc")].forEach(x=>{x.classList.toggle("img",!!pic);x.style.backgroundImage=pic?"url("+pic+")":""});
+ $("acedit").hidden=!U;$("acrmpic").hidden=!pic;if(U&&document.activeElement!==$("acname"))$("acname").value=nm;
  $("acst").textContent=e?(nm?e:"Signed in"):"Sign in from Health sync to save your history to a profile.";
  $("achs").textContent=H?H.length+(H.length==1?" item":" items")+" synced":"Not linked";
  $("acmode").textContent=B.live?"Your Cloude profile":"Demo mode, this browser only";
@@ -790,6 +806,19 @@ async function auth(up){const e=$("aem").value.trim(),p=$("apw").value,m=$("amsg
 $("aform").onsubmit=e=>{e.preventDefault();auth(false)};
 $("asignup").onclick=()=>auth(true);
 document.querySelectorAll("[data-out]").forEach(b=>b.onclick=async()=>{await B.signOut();await renderSync();if(LOGIN_URL)location.href=LOGIN_URL});
+$("acsave").onclick=async()=>{if(!U)return;const n=$("acname").value.trim(),m=$("acemsg");
+ if(!n){m.textContent="Enter a name first.";return}
+ m.textContent="Saving…";try{await B.setName(U,n);m.textContent="Name saved.";await renderSync()}catch(x){m.textContent=x.message||"Could not save your name."}};
+$("acname").onkeydown=e=>{if(e.key=="Enter")$("acsave").click()};
+$("acpick").onclick=()=>$("acfile").click();
+$("acfile").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f||!U)return;const m=$("acemsg");
+ if(!/^image\//.test(f.type)){m.textContent="Choose an image file.";return}
+ const img=new Image(),url=URL.createObjectURL(f);
+ img.onload=()=>{const S=160,c=document.createElement("canvas");c.width=c.height=S;const k=Math.max(S/img.width,S/img.height),w=img.width*k,h=img.height*k;
+  c.getContext("2d").drawImage(img,(S-w)/2,(S-h)/2,w,h);URL.revokeObjectURL(url);
+  B.setPic(U,c.toDataURL("image/jpeg",.85));m.textContent="Photo updated.";renderAccount()};
+ img.onerror=()=>{URL.revokeObjectURL(url);m.textContent="That image could not be read."};img.src=url};
+$("acrmpic").onclick=()=>{if(!U)return;B.setPic(U,null);$("acemsg").textContent="Photo removed.";renderAccount()};
 const dad=$("delacc");
 $("acdel").onclick=()=>{$("dacpw").value="";$("dacyes").disabled=true;$("damsg").textContent="";dad.showModal();$("dacpw").focus()};
 $("dacpw").oninput=e=>{$("dacyes").disabled=e.target.value.trim()!=="DELETE"};

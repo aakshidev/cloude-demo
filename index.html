@@ -1699,6 +1699,27 @@
       });
     }
 
+    // Already signed in? The landing page stays reachable, and its login
+    // buttons turn into "Open Cloude" links so nobody has to log in again.
+    // The Supabase session lives in browser storage, so nothing is signed out.
+    const cameForRecovery = /type=recovery/.test(location.hash);
+    if (supabaseReady && !cameForRecovery) {
+      supabaseClient.auth.getSession().then(({ data }) => {
+        if (!data || !data.session) return;
+        window.__cloudeSignedIn = true;
+        document.querySelectorAll('.js-enter-earth').forEach(el => {
+          const a = el.cloneNode(true);          // clone drops the dive-in click handler
+          a.classList.remove('js-enter-earth');
+          a.href = SIGNED_IN_DESTINATION;
+          const t = [...a.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+          if (t) t.textContent = 'Open Cloude ';
+          el.replaceWith(a);
+        });
+        const navLogin = document.querySelector('.toolbar-links a[data-spy="login"]');
+        if (navLogin) { navLogin.removeAttribute('data-spy'); navLogin.href = SIGNED_IN_DESTINATION; navLogin.textContent = 'Open Cloude'; }
+      }).catch(() => {});
+    }
+
     // Escape key
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && diveState.active) exitEarth();
@@ -1714,6 +1735,7 @@
       const isInteractiveField = ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'A'].includes(tag) || (e.target && e.target.isContentEditable);
       if (isInteractiveField) return;
       if (document.querySelector('.modal.active')) return;
+      if (window.__cloudeSignedIn) { window.location.href = SIGNED_IN_DESTINATION; return; }
       startEarthDive(e);
     });
 
