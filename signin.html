@@ -783,7 +783,7 @@ const B={
  async wipe(u){if(sb){await sb.from("medical_history").delete().eq("user_id",u.id)}else LS.d("cd_hist_"+u.id)},
  // Deletes history, profile and the login itself. Supabase needs the delete_user() SQL function (see the note in the reply) because the browser cannot delete an auth user directly.
  async deleteAccount(u){if(sb){await sb.from("medical_history").delete().eq("user_id",u.id);try{await sb.from("profiles").delete().eq("id",u.id)}catch(e){}
-   const{error}=await sb.rpc("delete_user");if(error)throw new Error("Could not delete the account. Please try again.");try{await sb.auth.signOut()}catch(e){}return}
+   const{error}=await sb.rpc("delete_user");if(error){console.error("delete_user failed:",error);throw new Error("Could not delete the account: "+(error.message||"unknown error")+(error.code?" ("+error.code+")":""))}try{await sb.auth.signOut()}catch(e){}return}
   LS.d("cd_hist_"+u.id);LS.d("cd_acc_"+u.email);LS.d("cd_user");LS.d("cd_pfp_"+u.id);LS.d("cd_name_"+u.id)}
 };
 let U=null,H=null,P=null,items=[];
