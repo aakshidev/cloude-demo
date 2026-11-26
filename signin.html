@@ -515,6 +515,70 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 .devrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;margin-top:8px;border:1.5px solid var(--line);border-radius:14px;background:var(--pale)}
 .devrow small{color:var(--mute)}.devrow .tag{font-size:.75rem;font-weight:700;color:var(--acc);margin-left:6px}
 #mfad code{font-size:.85rem}
+.moodlog{max-width:760px;margin:56px auto 0}
+.mlh{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.mlnav{display:flex;align-items:center;gap:8px}.mlnav b{min-width:9.5em;text-align:center}
+.mlnav button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:var(--pale);color:var(--ink);cursor:pointer;font-size:1.1rem;line-height:1}
+.mlnav button:disabled{opacity:.35;cursor:default}
+.mlg{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:16px}
+.mlw{text-align:center;font-size:.75rem;font-weight:700;color:var(--mute)}
+.mlc{position:relative;aspect-ratio:1;border-radius:12px;border:1.5px solid var(--line);background:var(--pale);display:grid;place-items:center}
+.mlc i{position:absolute;top:3px;left:6px;font-style:normal;font-size:.68rem;color:var(--mute)}
+.mlc span{font-size:clamp(1.1rem,3.4vw,1.7rem);line-height:1}
+.mlc.has{background:var(--sky);border-color:var(--acc)}
+.mlc.today{box-shadow:0 0 0 2px var(--acc)}.mlc.fut{opacity:.4}
+.mlrh{margin:20px 0 4px}.mll{list-style:none;margin:0;padding:0}
+.mll li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:.95rem}
+/* ===== Account dashboard ===== */
+.views>#account{justify-content:flex-start!important;scroll-behavior:smooth;scroll-padding-top:68px;scrollbar-width:thin;scrollbar-color:var(--line) transparent;padding-top:0}
+.views>#account::-webkit-scrollbar{width:8px}.views>#account::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+#account>.in{margin:0 auto;max-width:1040px;width:100%}
+#account [hidden]{display:none!important}
+.achead{padding-top:clamp(14px,3vh,28px)}.achead .lead{margin:.4rem 0 0;text-align:left}
+.acnav{position:sticky;top:0;z-index:3;display:flex;gap:8px;overflow-x:auto;padding:10px 0;margin:8px 0 16px;background:linear-gradient(var(--card) 82%,transparent);scrollbar-width:none}
+.acnav::-webkit-scrollbar{display:none}
+.acnav button{flex:none;border:1.5px solid var(--line);background:var(--pale);color:var(--ink);border-radius:99px;padding:7px 16px;font:600 .9rem "Nunito Sans",system-ui,sans-serif;cursor:pointer;transition:background .2s,color .2s}
+.acnav button:hover{border-color:var(--acc)}
+.acnav button[aria-current=true]{background:var(--acc);color:var(--on);border-color:var(--acc)}
+.acgrid{display:grid;grid-template-columns:290px minmax(0,1fr);gap:20px;align-items:start;padding-bottom:28px}
+.accol{display:grid;gap:16px;min-width:0}#acdz{display:grid;gap:16px}
+.accard{background:var(--pale);border:1px solid var(--line);border-radius:22px;padding:22px 24px;scroll-margin-top:68px}
+.accard h3{font-size:1.45rem;margin:0 0 2px}
+.acsub{margin:18px 0 6px;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.acme{position:sticky;top:64px;text-align:center}
+.acme .av2{width:92px;height:92px;font-size:3rem;margin:0 auto 12px;box-shadow:0 0 0 4px var(--sky)}
+.acme b{display:block;font-size:1.15rem;overflow-wrap:anywhere}
+.acme .acl{text-align:left}.acme .sbtns{flex-direction:column}.acme .btn{text-align:center}
+.acme .hsprompt{text-align:left}
+.acrow2{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:8px}
+.acdanger{border-color:#c2543a;background:rgba(194,84,58,.07)}.acdanger h3{color:#c2543a}
+.actopw{position:sticky;bottom:14px;height:0;text-align:right;overflow:visible;z-index:4}
+#actop{position:absolute;right:0;bottom:0;border:0;border-radius:99px;padding:10px 16px;background:var(--acc);color:var(--on);font:700 .9rem "Nunito Sans",system-ui,sans-serif;cursor:pointer;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+@media(max-width:860px){.acgrid{grid-template-columns:1fr}.acme{position:static}}
+/* ===== Digital detox page ===== */
+.views>#actions{overflow-y:auto;overscroll-behavior:contain;justify-content:flex-start!important;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+#actions>.in{margin:0 auto;max-width:1040px;width:100%;padding-bottom:20px}
+#actions [hidden]{display:none!important}
+.dthead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.dtstate{display:flex;align-items:center;gap:10px}
+.dtpill{padding:6px 14px;border-radius:99px;font-size:.85rem;font-weight:700;background:var(--pale);border:1px solid var(--line);color:var(--mute)}
+.dtpill.on{background:#e8f6ee;color:#136b3a;border-color:#9fd6b4}
+.dthero{margin-top:24px;text-align:center;padding:clamp(28px,5vw,52px)}.dthero .ico{margin:0 auto 14px}
+.dtben{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:22px 0;text-align:left}
+.dtben div{padding:14px 16px;border-radius:16px;background:var(--pale);border:1px solid var(--line);font-size:.93rem;line-height:1.45}
+.dtben b{display:block;margin-bottom:2px}
+.dtov{margin-top:20px;display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,32px);align-items:center}
+.dtring{position:relative;width:150px;height:150px}.dtring svg{width:100%;height:100%}
+.dtrv{position:absolute;inset:0;display:grid;place-content:center;text-align:center;line-height:1.1}
+.dtrv b{font:600 2.4rem "Cormorant Garamond",Georgia,serif}.dtrv span{font-size:.8rem;color:var(--mute)}
+.dtov h3{margin:0 0 4px;font-size:1.3rem}
+.dttiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.dttiles div{padding:10px 12px;border-radius:14px;background:var(--pale);border:1px solid var(--line)}
+.dttiles b{display:block;font-size:1.15rem}.dttiles span{font-size:.78rem;color:var(--mute)}
+.dtgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start}
+.dtcol{display:grid;gap:16px;min-width:0}
+.dtc h3{font-size:1.4rem;margin:0 0 2px}.dtc>p.mute{margin:.2rem 0 0;font-size:.92rem}
+@media(max-width:860px){.dtgrid{grid-template-columns:1fr}.dtov{grid-template-columns:1fr;justify-items:center;text-align:center}}
 </style>
 <script>try{var t=localStorage.getItem("cd_theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
@@ -526,9 +590,9 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 <header>
 <a class="logo" href="#home" aria-label="Cloude home"><img id="mark" alt="">Cloude.</a>
 <nav class="l" aria-label="Sections">
-<a href="#actions">Actions</a><a class="m" href="#sync">Health sync</a><a href="#insights">Research insights</a><a href="#workshops">Workshops</a><a href="#cloudee">Cloudee</a>
+<a href="#actions">Digital detox</a><a href="#sync">Health sync</a><a href="index.html">Landing page</a><a href="#cloudee">Cloudee</a><a class="m" href="#insights">Research insights</a><a class="m" href="#workshops">Workshops</a>
 </nav>
-<div class="hr"><nav class="r" aria-label="More"><a href="#sync">Health sync</a><a href="index.html">Landing page</a></nav><button class="thm" id="thm" type="button" aria-label="Switch to dark mode" title="Dark mode">🌙</button><a class="acirc" id="hacc" href="#account" aria-label="Account" title="Account">?</a></div>
+<div class="hr"><nav class="r" aria-label="More"><a href="#insights">Research insights</a><a href="#workshops">Workshops</a></nav><button class="thm" id="thm" type="button" aria-label="Switch to dark mode" title="Dark mode">🌙</button><a class="acirc" id="hacc" href="#account" aria-label="Account" title="Account">?</a></div>
 </header>
 <div class="shell">
 <div class="views">
@@ -543,10 +607,13 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 
 <div id="how" class="howwrap"><div class="in" style="max-width:1100px">
 <div class="appr"><p class="klabel">Our approach</p><div>
-<h2 class="stmt">Climate news can weigh on you. <span>Small steps make it lighter. Try grounding, a digital detox or quiet hours for news. No accounts, no pressure, and you can stop at any point.</span></h2>
+<h2 class="stmt">Climate news can weigh on you. <span>Small steps make it lighter. Check in on your mood each day and watch your pattern over time. No accounts, no pressure, and you can stop at any point.</span></h2>
 </div></div>
-<div class="trio">
-<a class="orb o3" href="#actions"><b>Take one step</b><span>Try grounding, digital detox or quiet hours for news.</span></a>
+<div class="moodlog card" id="moodlog">
+<div class="mlh"><div><h3>Your mood record</h3><p class="mute" id="mlsum" style="margin:0"></p></div>
+<div class="mlnav"><button type="button" id="mlprev" aria-label="Previous month">‹</button><b id="mlmon"></b><button type="button" id="mlnext" aria-label="Next month">›</button></div></div>
+<div class="mlg" id="mlgrid"></div>
+<h4 class="mlrh">Recent check-ins</h4><ul class="mll" id="mllist"></ul>
 </div></div></div>
 
 </section>
@@ -555,18 +622,46 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 
 
 <section id="actions" class="alt"><div class="in">
-<h2>Small steps that help</h2>
-<p class="lead" id="actnote">Pick one. You don't need to do them all.</p>
-<div class="grid3">
-<article class="card"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.5"/><path d="M5 20c1-5 4-7 7-7s6 2 7 7M4 15h16"/></svg></div>
-<h3>5-minute grounding</h3><p class="mute">Use your senses to come back to the present.</p>
-<button class="btn" id="gstart" aria-expanded="false" aria-controls="gpanel" style="margin-top:8px">Start</button></article>
-<article class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M4 4l16 16"/></svg></div>
-<h3>Digital detox</h3><p class="mute">Screen time limits, reminders for water, nutrition and more, and quiet hours.</p>
-<button class="btn ghost" type="button" id="dopen" style="margin-top:12px">Set up</button><p class="ok" id="dmsg" role="status"></p></article>
+<div class="dthead"><div><h2>Digital detox</h2><p class="lead" style="text-align:left;margin:.3rem 0 0">Take back your time with screen limits, gentle reminders and quiet hours.</p></div>
+<div class="dtstate"><span class="dtpill" id="dmsg" role="status"></span><button class="btn ghost" type="button" id="doff" hidden style="padding:8px 18px">Turn off</button></div></div>
+
+<div id="dtOff" class="card dthero">
+<div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M4 4l16 16"/></svg></div>
+<h3 style="font-size:1.9rem">Take back your time</h3>
+<p class="mute" style="max-width:52ch;margin:.4rem auto 0">Digital detox helps you spend less time on the apps that drain you, without having to count minutes yourself.</p>
+<div class="dtben"><div><b>⏱ Screen time limits</b>Set a daily limit per app and get a nudge before you go over.</div><div><b>💧 Reminders</b>Water, meals, vitamins or a stretch, at the times you choose.</div><div><b>🌙 Quiet hours</b>Hide announcements and keep the news away in the evening.</div></div>
+<button class="btn" type="button" id="dopen">Turn on Digital detox</button>
+<p class="mute" style="font-size:.85rem;margin:12px 0 0">You can turn it off at any time. Everything stays on this device.</p>
 </div>
-<div class="card" id="gpanel" hidden aria-live="polite"><p class="mute" id="gcount"></p><h3 id="gtxt"></h3><p class="mute" id="ghint"></p><button class="btn" id="gnext" style="margin-top:12px">Next</button></div>
-</div></section>
+
+<div id="dtOn" hidden>
+<div class="card dtov">
+<div class="dtring"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="none" stroke="var(--line)" stroke-width="9"/><circle id="dring" cx="50" cy="50" r="44" fill="none" stroke="var(--acc)" stroke-width="9" stroke-linecap="round" transform="rotate(-90 50 50)" style="transition:stroke-dashoffset .5s,stroke .3s"/></svg><div class="dtrv"><b id="dringv">0</b><span>min today</span></div></div>
+<div><h3>Today</h3><p id="dsum" style="margin:0;font-weight:600"></p><p class="mute" id="dnow" style="margin:4px 0 0;font-size:.92rem"></p>
+<div class="dttiles"><div><b id="dt1">0</b><span>Apps tracked</span></div><div><b id="dt2">0</b><span>Reminders</span></div><div><b id="dt3" style="font-size:.95rem">-</b><span>Quiet hours</span></div></div></div>
+</div>
+<div class="dtgrid">
+<div class="card dtc"><h3>Screen time limits</h3>
+<p class="mute">Add the apps you want to limit and set a daily time. Press Start when you open an app and Stop when you leave.</p>
+<label class="switch" style="margin-top:12px"><input type="checkbox" id="ddemo"><span class="track"></span><span>Demo speed (1 second counts as 1 minute)</span></label>
+<div class="pchips" id="dchips" role="group" aria-label="Quick add apps"></div>
+<div class="trow" style="align-items:stretch;margin-top:12px"><input type="text" id="dcustom" placeholder="Another app…" aria-label="Add another app" maxlength="30" autocomplete="off" style="flex:1;min-width:140px;margin:0"><button class="btn ghost" type="button" id="dadd" style="padding:10px 22px">Add</button></div>
+<div id="dapps"></div></div>
+<div class="dtcol">
+<div class="card dtc"><h3>Last 7 days</h3><div id="dchart" style="margin-top:10px"></div>
+<p class="mute" style="font-size:.82rem;margin:6px 0 0">Bars are minutes on your apps. The dashed line is that day's limit and red bars went over.</p></div>
+<div class="card dtc"><h3>Quiet hours</h3><p class="mute">Cloude sends a notice when quiet hours start and end, hides announcements and shows a calm banner.</p>
+<div class="trow"><label>From<input type="time" id="dqs" value="21:00"></label><label>Until<input type="time" id="dqe" value="07:00"></label></div>
+<p class="pst" id="dquiet" style="margin:12px 0 0;display:block;width:fit-content"></p></div>
+<div class="card dtc"><h3>Reminders</h3><p class="mute">Water, nutrition, collagen or anything else. Pick a preset or set your own time.</p>
+<div class="pchips" id="drp" role="group" aria-label="Reminder presets"></div>
+<div class="trow"><label>Time<input type="time" id="drt" value="09:00"></label><label style="flex:1;min-width:150px">Reminder<input type="text" id="drx" maxlength="60" placeholder="e.g. Take vitamins" style="margin:0"></label><button class="btn" type="button" id="dradd">Add</button></div>
+<div id="drems"></div>
+<div class="trow"><button class="btn ghost" type="button" id="dtest">Send a test notification</button><span class="pst" id="dpst" role="status"></span></div>
+<label class="switch" style="margin-top:14px"><input type="checkbox" id="dsnd" checked><span class="track"></span><span>Play a sound with notifications</span></label></div>
+</div></div>
+<div class="dnote">Cloude runs in your browser, so it counts the time you log with <b>Start</b> and <b>Stop</b> on each app, and alerts arrive while Cloude is open in a tab.</div>
+</div></div></section>
 
 <section id="sync"><div class="in">
 <div class="grid2" style="align-items:start">
@@ -600,27 +695,37 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 <p class="mute" id="snote" style="font-size:.85rem;margin-top:14px"></p>
 </div></div></div></section>
 
-<section id="account" aria-label="Your account"><div class="in" style="max-width:720px">
-<h2>Your account</h2>
-<p class="lead">Your profile and what Cloude has saved for you.</p>
-<div class="card" style="margin-top:24px">
-<div class="acrow"><span class="av2" id="acav" aria-hidden="true">?</span><div><b id="acem"></b><p class="mute" id="acst" style="margin:0"></p></div></div>
-<div class="pedit" id="acedit" hidden>
+<section id="account" aria-label="Your account"><div class="in">
+<div class="achead"><h2>Your account</h2><p class="lead">Your profile, security and everything Cloude has saved for you.</p></div>
+<div class="acnav" id="acnav" aria-label="Jump to a section" hidden>
+<button type="button" data-acgo="acedit">Profile</button><button type="button" data-acgo="acsec">Security</button><button type="button" data-acgo="acdata">Your data</button><button type="button" data-acgo="acdanger">Danger zone</button></div>
+<div class="acgrid">
+<div class="accard acme">
+<span class="av2" id="acav" aria-hidden="true">?</span><b id="acem"></b><p class="mute" id="acst" style="margin:2px 0 0"></p>
+<dl class="acl"><div><dt>Health sync</dt><dd id="achs"></dd></div><div><dt>Data storage</dt><dd id="acmode"></dd></div></dl>
+<div class="hsprompt" id="achsp" hidden><p><b>You're not using Health sync yet.</b> <span class="mute">Link your medical history so Cloude can tailor its suggestions to you. It's optional and you can switch it off any time.</span></p><a class="btn" href="#sync" id="acuse">Use Health sync</a></div>
+<div class="sbtns"><a class="btn" href="#sync" id="acsync">Manage Health sync</a><a class="btn ghost" href="index.html" id="aclanding">Back to landing page</a><button class="btn ghost" type="button" data-out id="acout">Sign out</button></div>
+</div>
+<div class="accol">
+<div class="accard" id="acedit" hidden><h3>Profile</h3><p class="mute" style="margin:0 0 12px;font-size:.92rem">How you appear in Cloude.</p>
 <label class="f" for="acname" style="margin-top:0">Display name</label>
 <input type="text" id="acname" maxlength="40" autocomplete="name" placeholder="Your name">
 <div class="sbtns"><button class="btn" type="button" id="acsave">Save name</button><button class="btn ghost" type="button" id="acpick">Change photo</button><button class="btn ghost" type="button" id="acrmpic" hidden>Remove photo</button></div>
 <input type="file" id="acfile" accept="image/*" hidden>
-<div class="sbtns"><button class="btn ghost" type="button" id="acpw">Change password</button><button class="btn ghost" type="button" id="acchem">Change email</button></div>
-<p id="acemsg" role="status" class="ok" style="margin:0;min-height:1.4em"></p></div>
-<dl class="acl"><div><dt>Health sync</dt><dd id="achs"></dd></div><div><dt>Data storage</dt><dd id="acmode"></dd></div></dl>
-<div class="hsprompt" id="achsp" hidden><p><b>You're not using Health sync yet.</b> <span class="mute">Link your medical history so Cloude can tailor its suggestions to you. It's optional and you can switch it off any time.</span></p><a class="btn" href="#sync" id="acuse">Use Health sync</a></div>
-<div class="sbtns"><a class="btn ghost" href="index.html" id="aclanding">Back to landing page</a><a class="btn" href="#sync" id="acsync">Manage Health sync</a><button class="btn ghost" type="button" data-out id="acout">Sign out</button></div>
-<div id="acsec" hidden><h3 style="margin:24px 0 6px;font-size:1.5rem">Security</h3>
+<div class="acsub">Sign-in details</div>
+<div class="sbtns" style="margin-top:0"><button class="btn ghost" type="button" id="acpw">Change password</button><button class="btn ghost" type="button" id="acchem">Change email</button></div>
+<p id="acemsg" role="status" class="ok" style="margin:10px 0 0;min-height:1.4em"></p></div>
+<div class="accard" id="acsec" hidden><h3>Security</h3><p class="mute" style="margin:0 0 12px;font-size:.92rem">Protect your account and see where you're signed in.</p>
 <div class="devrow"><div><b>Two-step login</b><p class="mute" id="mfast" style="margin:0;font-size:.9rem"></p></div><button class="btn ghost" type="button" id="mfabtn">Turn on</button></div>
-<h4 style="margin:18px 0 0">Signed-in devices</h4><div id="devlist"></div>
+<div class="acsub">Signed-in devices</div><div id="devlist"></div>
 <div class="sbtns"><button class="btn ghost" type="button" id="devout">Sign out other devices</button></div></div>
-<div class="dzone" id="acdz" hidden><button class="btn ghost" type="button" id="acdl" style="margin-right:8px">Download my data</button><button class="btn danger" type="button" id="acdel">Delete account</button><p class="mute" style="font-size:.85rem;margin:8px 0 0">Permanently removes your account and any synced medical history.</p></div>
-</div></div></section>
+<div id="acdz" hidden>
+<div class="accard" id="acdata"><h3>Your data</h3><div class="acrow2"><p class="mute" style="margin:0;font-size:.92rem;max-width:34ch">Get a copy of your account, health sync, mood and detox data as a file.</p><button class="btn ghost" type="button" id="acdl">Download my data</button></div></div>
+<div class="accard acdanger" id="acdanger"><h3>Danger zone</h3><div class="acrow2"><p class="mute" style="margin:0;font-size:.92rem;max-width:34ch">Permanently removes your account and any synced medical history. This can't be undone.</p><button class="btn danger" type="button" id="acdel">Delete account</button></div></div>
+</div>
+</div></div>
+<div class="actopw"><button type="button" id="actop" hidden aria-label="Back to top">↑ Top</button></div>
+</div></section>
 
 <section id="report" class="alt" aria-label="Your personalised checkup"><div class="in" id="rbody" style="max-width:1000px"></div></section>
 <section id="insights" class="alt" aria-label="Research insights"><div class="in" style="max-width:1140px">
@@ -684,32 +789,6 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 <p>Digital detox will manage your screen time on this device. It tracks the time on the apps you choose, sends you reminders and limit alerts, and applies your quiet hours. Your browser will also ask to show notifications.</p>
 <p class="mute" style="font-size:.9rem">You can turn it off at any time. Everything stays on this device.</p>
 <div class="row"><button class="btn ghost" type="button" id="dno">Don't allow</button><button class="btn" type="button" id="dyes">Allow</button></div></div></dialog>
-<dialog id="detoxd" aria-labelledby="dtitle">
-<div class="dhd"><div><h2 id="dtitle">Digital detox</h2><p>Screen time limits, reminders and quiet hours.</p></div><button class="btn ghost" type="button" id="dclose" style="padding:8px 18px">Close</button></div>
-<div class="dbd">
-<div class="dnote">Cloude runs in your browser, so it counts the time you log with <b>Start</b> and <b>Stop</b> on each app, and alerts arrive while Cloude is open in a tab.</div>
-<div class="dsec"><h3><span class="dn">1</span>Screen time limits</h3>
-<p class="mute">Add the apps you want to limit and set a daily time. Press Start when you open an app and Stop when you leave. Cloude tells you how much time is left and when you go over.</p>
-<label class="switch" style="margin-top:12px"><input type="checkbox" id="ddemo"><span class="track"></span><span>Demo speed (1 second counts as 1 minute)</span></label>
-<div class="pchips" id="dchips" role="group" aria-label="Quick add apps"></div>
-<div class="trow" style="align-items:stretch;margin-top:12px"><input type="text" id="dcustom" placeholder="Another app…" aria-label="Add another app" maxlength="30" autocomplete="off" style="flex:1;min-width:140px;margin:0"><button class="btn ghost" type="button" id="dadd" style="padding:10px 22px">Add</button></div>
-<div id="dapps"></div></div>
-<div class="dsec"><h3><span class="dn">2</span>Reminders</h3>
-<p class="mute">Water, nutrition, collagen or anything else. Pick a preset or set your own time on the clock.</p>
-<div class="pchips" id="drp" role="group" aria-label="Reminder presets"></div>
-<div class="trow"><label>Time<input type="time" id="drt" value="09:00"></label><label style="flex:1;min-width:150px">Reminder<input type="text" id="drx" maxlength="60" placeholder="e.g. Take vitamins" style="margin:0"></label><button class="btn" type="button" id="dradd">Add</button></div>
-<div id="drems"></div>
-<div class="trow"><button class="btn ghost" type="button" id="dtest">Send a test notification</button><span class="pst" id="dpst" role="status"></span></div>
-<label class="switch" style="margin-top:14px"><input type="checkbox" id="dsnd" checked><span class="track"></span><span>Play a sound with notifications</span></label></div>
-<div class="dsec"><h3><span class="dn">3</span>Quiet hours</h3>
-<p class="mute">Cloude sends a notice when quiet hours start and end, hides announcements and shows a calm banner.</p>
-<div class="trow"><label>From<input type="time" id="dqs" value="21:00"></label><label>Until<input type="time" id="dqe" value="07:00"></label></div></div>
-<div class="dsec"><h3><span class="dn">4</span>Your progress</h3>
-<p id="dsum" style="font-weight:600"></p><div id="dchart" style="margin-top:10px"></div>
-<p class="mute" style="font-size:.85rem">Bars are minutes on your apps each day, the dashed line is that day's limit and red bars went over. A summary is sent when quiet hours begin.</p></div>
-</div>
-<div class="dft"><button class="btn ghost" type="button" id="doff">Turn off detox</button><button class="btn" type="button" id="ddone">Done</button></div>
-</dialog>
 <div id="dtoast" popover="manual" role="status"></div>
 <div id="snack" role="status" aria-live="polite"></div>
 <button id="sos" type="button" aria-haspopup="dialog">♥ Need help now?</button>
@@ -757,14 +836,6 @@ const Q=[
 ["How often do climate conversations leave you tense or drained?","Conversations"]];
 const OPT=["Never","Rarely","Sometimes","Often","Always"];
 let res=null;
-const G=[["Name 5 things you can see","Look slowly around the room."],["Name 4 things you can touch","Notice texture and temperature."],["Name 3 things you can hear","Include quiet background sounds."],["Name 2 things you can smell","Or recall a smell you like."],["Name 1 thing you can taste","Take one slow breath in and out."]];
-let gi=0;
-$("gstart").onclick=()=>{gi=0;$("gpanel").hidden=false;$("gstart").setAttribute("aria-expanded","true");gdraw()};
-function gdraw(){
- if(gi>=G.length){$("gcount").textContent="Done";$("gtxt").textContent="Well done. Notice how your body feels now.";$("ghint").textContent="";$("gnext").hidden=true;return}
- $("gnext").hidden=false;$("gcount").textContent="Step "+(gi+1)+" of 5";$("gtxt").textContent=G[gi][0];$("ghint").textContent=G[gi][1];$("gnext").textContent=gi==4?"Finish":"Next";
-}
-$("gnext").onclick=()=>{gi++;gdraw()};
 /* ===== Health sync ===== */
 // 1) Paste your Supabase project URL and anon (public) key here. Leave empty to run in demo mode.
 const SUPABASE_URL="https://seggtcscckgzhbafkeie.supabase.co",SUPABASE_ANON_KEY="sb_publishable_5TsD9nzzdLB84R3ADgSyJA_JHCU-KD0";
@@ -945,7 +1016,7 @@ function drawReport(){
  <h3 class="rh">7-day progress</h3><div class="card"><ul class="pl">${plan.map((x,i)=>`<li><label class="ck"><input type="checkbox" data-g="plan" data-n="${i}"${pd[i]?" checked":""}><b class="d">${x[0]}</b><span>${x[1]}</span></label></li>`).join("")}</ul></div>
  <h3 class="rh">Be prepared</h3><div class="card"><div class="bar" style="margin-top:0"><i id="kbar"></i></div><p class="mute" id="ktxt" style="margin:-16px 0 8px;font-size:.9rem"></p>${KIT.map((k,i)=>`<label class="ck"><input type="checkbox" data-g="kit" data-n="${i}"${kd[i]?" checked":""}>${k}</label>`).join("")}</div>
  <h3 class="rh">When to reach out</h3><div class="card"><p class="mute" style="margin-top:0">If worry affects your sleep, work or daily life for more than two weeks, speak to a doctor or counsellor. In India, Tele-MANAS offers free, 24x7 support on 14416. If you feel unsafe, contact local emergency services.</p>
- <div class="sbtns"><a class="btn" href="#actions">See steps for you</a><button class="btn ghost" type="button" onclick="print()">Print or save report</button></div></div>`;
+ <div class="sbtns"><a class="btn" href="#actions">Open Digital detox</a><button class="btn ghost" type="button" onclick="print()">Print or save report</button></div></div>`;
  $("rbody").onchange=e=>{const x=e.target;if(!x.dataset.g)return;const a=LS.g("cx_"+x.dataset.g)||[];a[+x.dataset.n]=x.checked;LS.s("cx_"+x.dataset.g,a);updProg()};
  updProg();
  $("report").scrollTop=0;setTimeout(fit,40)}
@@ -978,7 +1049,7 @@ function check(a){
  else if(p>=.5&&p<1&&!f[K+"p50"]){k="p50";t=K+": halfway";b=left+" min left today."}
  if(k){f[K+k]=1;save();notify(t,b,"app-"+K)}}
 function status(a){const m=used(a.n);return (m>=a.l?(m>a.l?"Exceeded by "+(m-a.l)+" min":"Limit reached"):(a.l-m)+" min left")+" · "+m+" of "+dur(a.l)+" used"}
-function refresh(){document.querySelectorAll("#dapps .arow").forEach(r=>{const a=S.apps.find(x=>x.n==r.dataset.n);if(!a)return;const m=used(a.n);r.classList.toggle("over",m>=a.l);r.querySelector(".ubar i").style.width=Math.min(100,m/a.l*100)+"%";r.querySelector(".ustat").textContent=status(a);r.querySelector("[data-run]").textContent=run==a.n?"Stop":"Start"})}
+function refresh(){document.querySelectorAll("#dapps .arow").forEach(r=>{const a=S.apps.find(x=>x.n==r.dataset.n);if(!a)return;const m=used(a.n);r.classList.toggle("over",m>=a.l);r.querySelector(".ubar i").style.width=Math.min(100,m/a.l*100)+"%";r.querySelector(".ustat").textContent=status(a);r.querySelector("[data-run]").textContent=run==a.n?"Stop":"Start"});drawStats()}
 function drawApps(){
  $("dapps").innerHTML=S.apps.length?S.apps.map(a=>`<div class="arow" data-n="${esc(a.n)}"><div class="ahead"><b>${esc(a.n)}</b><button type="button" class="btn ghost" data-run style="padding:6px 16px">Start</button><button type="button" class="rm" data-rm>Remove</button></div><div class="afields"><label>Daily limit<span><input type="number" min="0" max="23" data-h value="${Math.floor(a.l/60)}"> h <input type="number" min="0" max="59" data-m value="${a.l%60}"> min</span></label></div><div class="ubar" aria-hidden="true"><i></i></div><p class="ustat"></p></div>`).join(""):'<p class="mute" style="margin:14px 0 0">No apps yet. Add the ones you want to limit.</p>';
  $("dchips").innerHTML=COMMON.map(n=>`<button type="button" data-add="${esc(n)}"${S.apps.some(a=>a.n==n)?" disabled":""}>+ ${esc(n)}</button>`).join("");refresh();drawProg();msg()}
@@ -1008,7 +1079,14 @@ $("dtest").onclick=async()=>{try{if(Notification.permission=="default")await Not
 function isQuiet(){const s=mod(S.qs),e=mod(S.qe),d=new Date(),n=d.getHours()*60+d.getMinutes();return s==e?false:s<e?(n>=s&&n<e):(n>=s||n<e)}
 function applyQuiet(){const q=S.ok&&isQuiet();document.body.classList.toggle("quiet",q);const b=$("qbanner");if(b){b.hidden=!q;const x=$("qtxt");if(x&&q)x.textContent="Quiet hours are on until "+f12(S.qe)+". News and alerts can wait."}}
 ["dqs","dqe"].forEach(id=>$(id).onchange=e=>{if(!/^\d\d:\d\d$/.test(e.target.value)){e.target.value=id=="dqs"?S.qs:S.qe;return}S[id=="dqs"?"qs":"qe"]=e.target.value;save();tick()});
-function msg(){$("dmsg").textContent=S.ok?"Detox on · "+S.apps.length+" app"+(S.apps.length==1?"":"s")+" · "+S.rem.length+" reminder"+(S.rem.length==1?"":"s")+" · quiet "+f12(S.qs)+" to "+f12(S.qe):"Detox off"}
+function drawStats(){const r=$("dring");if(!r)return;
+ const tot=S.apps.reduce((a,x)=>a+used(x.n),0),lim=S.apps.reduce((a,x)=>a+x.l,0),p=lim?Math.min(1,tot/lim):0,over=S.apps.some(a=>used(a.n)>a.l),C=276.46;
+ r.style.strokeDasharray=C;r.style.strokeDashoffset=C*(1-p);r.style.stroke=over?"#c2543a":"var(--acc)";
+ $("dringv").textContent=tot;$("dt1").textContent=S.apps.length;$("dt2").textContent=S.rem.length;$("dt3").textContent=f12(S.qs)+" – "+f12(S.qe);
+ $("dnow").textContent=run?"Tracking "+run+" now.":"Not tracking an app. Press Start on an app below.";
+ $("dquiet").textContent=isQuiet()?"Quiet hours are active right now":"Quiet hours are not active right now";
+ $("dmsg").classList.toggle("on",!!S.ok)}
+function msg(){$("dmsg").textContent=S.ok?"Detox on · "+S.apps.length+" app"+(S.apps.length==1?"":"s")+" · "+S.rem.length+" reminder"+(S.rem.length==1?"":"s")+" · quiet "+f12(S.qs)+" to "+f12(S.qe):"Detox off";drawStats()}
 function tick(){applyQuiet();msg();if(!S.ok)return;
  const d=day(),f=S.fired[d]||(S.fired[d]={}),t=new Date(),n=t.getHours()*60+t.getMinutes(),s=mod(S.qs),e=mod(S.qe);
  if(!f.sum&&n>=s&&Object.keys(S.use[d]||{}).length){f.sum=1;save();const ex=S.apps.filter(a=>used(a.n)>a.l);notify("Your day in review",S.apps.filter(a=>used(a.n)).map(a=>a.n+" "+used(a.n)+"/"+a.l+" min").join(" · ")+(ex.length?". Limit exceeded on "+ex.map(a=>a.n).join(", ")+".":". All within limits."))}
@@ -1032,16 +1110,17 @@ function drawProg(){
  $("dsum").textContent=S.apps.length?"Today: "+tot+" min on your apps"+(ex.length?" · limit exceeded on "+ex.join(", "):" · all within limits"):"Add an app to start tracking."}
 
 /* consent + dialogs */
-const dlg=$("detoxd"),cons=$("dcons");
-function openSetup(){$("dqs").value=S.qs;$("dqe").value=S.qe;$("ddemo").checked=S.demo;$("dsnd").checked=S.snd!==false;drawApps();drawRems();drawPerm();dlg.showModal();dlg.querySelector(".dbd").scrollTop=0}
+const cons=$("dcons");
+function showDetox(){const on=!!S.ok;$("dtOff").hidden=on;$("dtOn").hidden=!on;$("doff").hidden=!on;
+ if(on){$("dqs").value=S.qs;$("dqe").value=S.qe;$("ddemo").checked=S.demo;$("dsnd").checked=S.snd!==false;drawApps();drawRems();drawPerm()}msg()}
+function openSetup(){showDetox();$("actions").scrollTop=0}
 $("dopen").onclick=()=>S.ok?openSetup():cons.showModal();
-$("dno").onclick=()=>{S.ok=false;run=null;save();cons.close();tick();toast("Digital detox is off","No permission was given, so nothing will be tracked or sent.")};
-$("dyes").onclick=async()=>{S.ok=true;save();try{if("Notification" in window&&Notification.permission=="default")await Notification.requestPermission()}catch(e){}cons.close();tick();openSetup()};
-$("doff").onclick=()=>{S.ok=false;run=null;save();dlg.close();tick();toast("Digital detox is off","Tracking and reminders have stopped.")};
-$("dclose").onclick=$("ddone").onclick=()=>{dlg.close();if(S.ok)snack("Digital detox is on")};
-[dlg,cons].forEach(d=>d.addEventListener("click",e=>{if(e.target===d)d.close()}));
-setInterval(()=>{if(S.ok&&run){const a=S.apps.find(x=>x.n==run);if(a){const d=day();(S.use[d]||(S.use[d]={}))[a.n]=(S.use[d][a.n]||0)+(S.demo?60:1);S.lh[d]=Object.fromEntries(S.apps.map(x=>[x.n,x.l]));check(a);refresh();if(dlg.open&&sec%3==0)drawProg()}}if(++sec%5==0)save()},1000);
-setInterval(tick,15000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)tick()});addEventListener("pagehide",save);tick();
+$("dno").onclick=()=>{S.ok=false;run=null;save();cons.close();tick();showDetox();toast("Digital detox is off","No permission was given, so nothing will be tracked or sent.")};
+$("dyes").onclick=async()=>{S.ok=true;save();try{if("Notification" in window&&Notification.permission=="default")await Notification.requestPermission()}catch(e){}cons.close();tick();openSetup();snack("Digital detox is on")};
+$("doff").onclick=()=>{S.ok=false;run=null;save();tick();showDetox();toast("Digital detox is off","Tracking and reminders have stopped.")};
+[cons].forEach(d=>d.addEventListener("click",e=>{if(e.target===d)d.close()}));
+setInterval(()=>{if(S.ok&&run){const a=S.apps.find(x=>x.n==run);if(a){const d=day();(S.use[d]||(S.use[d]={}))[a.n]=(S.use[d][a.n]||0)+(S.demo?60:1);S.lh[d]=Object.fromEntries(S.apps.map(x=>[x.n,x.l]));check(a);refresh();if(sec%3==0)drawProg()}}if(++sec%5==0)save()},1000);
+showDetox();setInterval(tick,15000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)tick()});addEventListener("pagehide",save);tick();
 })();
 (function(){
 const log=$("clog"),inp=$("cmsg"),btn=$("csend"),
@@ -1131,7 +1210,7 @@ if(!RM){
  });
 }
 
-function fit(){document.querySelectorAll(".views>section.on:not(#home):not(#insights):not(#cloudee):not(#report):not(#account)>.in").forEach(el=>{
+function fit(){document.querySelectorAll(".views>section.on:not(#home):not(#insights):not(#cloudee):not(#report):not(#account):not(#actions)>.in").forEach(el=>{
  const p=el.parentElement,c=getComputedStyle(p),avail=p.clientHeight-parseFloat(c.paddingTop)-parseFloat(c.paddingBottom);
  let z=1;el.style.zoom=z;
  for(let i=0;i<4;i++){const h=el.getBoundingClientRect().height;if(h<=avail)break;z=Math.max(.5,z*avail/h*.98);el.style.zoom=z}
@@ -1261,6 +1340,39 @@ $("acdl").onclick=()=>{if(!U)return;
  const out={exported_at:new Date().toISOString(),account:{id:U.id,email:U.email,created_at:U.created_at||null,last_sign_in:U.last_sign_in_at||null,name:(P&&P.full_name)||(U.user_metadata&&U.user_metadata.full_name)||LS.g("cd_name_"+U.id)||null},profile:P||null,medical_history:H||null,mood_checkins:LS.g(mk())||{},digital_detox_settings:(typeof S!=="undefined")?S:null};
  let txt;try{txt=JSON.stringify(out,null,2)}catch(e){txt=JSON.stringify({error:"Could not export some settings"})}
  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"application/json"}));a.download="cloude-data-"+dk(new Date())+".json";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);snack("Download started")};
+</script>
+<script>
+/* ===== Mood record (calendar of days with a check-in) ===== */
+let mlY=new Date().getFullYear(),mlM=new Date().getMonth();
+function renderMoodLog(){const m=LS.g(mk())||{},now=new Date(),first=new Date(mlY,mlM,1),dim=new Date(mlY,mlM+1,0).getDate(),lead=(first.getDay()+6)%7,todayK=dk(now);
+ $("mlmon").textContent=first.toLocaleDateString(undefined,{month:"long",year:"numeric"});
+ let h=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(x=>'<span class="mlw">'+x+'</span>').join(""),cnt=0;const tally={};
+ for(let i=0;i<lead;i++)h+="<span></span>";
+ for(let d=1;d<=dim;d++){const k=mlY+"-"+String(mlM+1).padStart(2,"0")+"-"+String(d).padStart(2,"0"),v=m[k],has=v!==undefined&&EM[v];
+  if(has){cnt++;tally[v]=(tally[v]||0)+1}
+  h+='<div class="mlc'+(has?" has":"")+(k===todayK?" today":"")+(new Date(mlY,mlM,d)>now?" fut":"")+'"'+(has?' title="'+d+" "+first.toLocaleDateString(undefined,{month:"short"})+": "+EM[v][1]+'"':"")+"><i>"+d+"</i>"+(has?"<span>"+EM[v][0]+"</span>":"")+"</div>"}
+ $("mlgrid").innerHTML=h;
+ const top=Object.keys(tally).sort((a,b)=>tally[b]-tally[a])[0];
+ $("mlsum").textContent=cnt?cnt+(cnt==1?" check-in":" check-ins")+" this month · most often "+EM[top][0]+" "+EM[top][1]:"No check-ins this month yet. Pick an emoji at the top of this page.";
+ const ks=Object.keys(m).filter(k=>EM[m[k]]).sort().reverse().slice(0,5);
+ $("mllist").innerHTML=ks.length?ks.map(k=>{const a=k.split("-"),dt=new Date(+a[0],+a[1]-1,+a[2]);return"<li><span>"+dt.toLocaleDateString(undefined,{weekday:"short",day:"numeric",month:"short"})+"</span><b>"+EM[m[k]][0]+" "+EM[m[k]][1]+"</b></li>"}).join(""):'<li class="mute">Nothing logged yet.</li>';
+ $("mlnext").disabled=mlY===now.getFullYear()&&mlM===now.getMonth()}
+$("mlprev").onclick=()=>{mlM--;if(mlM<0){mlM=11;mlY--}renderMoodLog()};
+$("mlnext").onclick=()=>{mlM++;if(mlM>11){mlM=0;mlY++}renderMoodLog()};
+const _rm=renderMood;renderMood=function(){_rm();renderMoodLog()};renderMoodLog();
+</script>
+<script>
+/* ===== Account dashboard: section chips, scroll-spy, back to top ===== */
+const acs=$("account"),chips=[...document.querySelectorAll("[data-acgo]")];
+chips.forEach(b=>b.onclick=()=>{const t=$(b.dataset.acgo);if(t)t.scrollIntoView({behavior:RM?"auto":"smooth",block:"start"})});
+function acSpy(){$("actop").hidden=acs.scrollTop<240;const top=acs.getBoundingClientRect().top;let cur="";
+ chips.forEach(b=>{const t=$(b.dataset.acgo);if(t&&!t.closest("[hidden]")&&t.getBoundingClientRect().top-top<130)cur=b.dataset.acgo});
+ if(acs.scrollTop+acs.clientHeight>=acs.scrollHeight-4){const v=chips.filter(b=>!b.hidden);if(v.length)cur=v[v.length-1].dataset.acgo}
+ chips.forEach(b=>b.setAttribute("aria-current",String(b.dataset.acgo===cur)))}
+let _ar;acs.addEventListener("scroll",()=>{cancelAnimationFrame(_ar);_ar=requestAnimationFrame(acSpy)},{passive:true});
+$("actop").onclick=()=>acs.scrollTo({top:0,behavior:RM?"auto":"smooth"});
+const _ra3=renderAccount;renderAccount=function(){_ra3();$("acnav").hidden=!U;chips.forEach(b=>b.hidden=!!$(b.dataset.acgo).closest("[hidden]"));acSpy()};renderAccount();
+const _sh=show;show=function(id){_sh(id);if(id==="account"){acs.scrollTop=0;setTimeout(acSpy,50)}};
 </script>
 <script>
 (function(){var sp=document.getElementById('splash');if(!sp)return;
