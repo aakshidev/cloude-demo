@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
+<meta name="theme-color" content="#3f6fa8">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
 <title>Cloude – Find your center in a changing world</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito+Sans:wght@400;600&display=swap">
 <style>
@@ -579,6 +583,34 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 .dtcol{display:grid;gap:16px;min-width:0}
 .dtc h3{font-size:1.4rem;margin:0 0 2px}.dtc>p.mute{margin:.2rem 0 0;font-size:.92rem}
 @media(max-width:860px){.dtgrid{grid-template-columns:1fr}.dtov{grid-template-columns:1fr;justify-items:center;text-align:center}}
+
+/* ===== Phone app layout ===== */
+.tabbar{display:none}
+dialog#picd{border:1px solid var(--line);border-radius:28px;background:var(--card);color:var(--ink);padding:clamp(20px,5vw,32px);width:min(420px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;box-shadow:0 30px 80px -20px rgba(23,48,79,.45)}
+dialog#picd::backdrop{background:rgba(23,48,79,.5);backdrop-filter:blur(4px)}
+#picd h2{font-size:1.9rem;margin-bottom:10px}
+.peview{display:grid;place-items:center;background:var(--pale);border:1px dashed var(--line);border-radius:18px;padding:12px}
+#pecv{max-width:100%;border-radius:12px;touch-action:none;cursor:grab;background:#000}
+#picd input[type=range]{width:100%;accent-color:var(--acc)}
+#picd .trow input[type=number]{width:100%}#picd .trow label{flex:1}
+@media(max-width:700px){
+.ann{font-size:.8rem;padding:6px 3vw}
+header{padding:8px 3vw;gap:4px 10px}header .logo{font-size:1.6rem}
+nav.l{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav.l::-webkit-scrollbar{display:none}nav.l a:not(.m){display:none}nav a{padding:9px 14px;font-size:.9rem}
+.shell{padding:8px 2vw;gap:8px}
+.views>section{border-radius:22px;padding:16px 14px}
+input,select,textarea{font-size:16px!important}
+.btn,.acnav button,.pchips button,.chip,.cq button,.scs button{min-height:44px}
+.thm,a.acirc{width:44px;height:44px}
+.tabbar{display:flex;flex:none;gap:2px;padding:6px 6px 4px;background:var(--card);border-top:1px solid var(--line)}
+.tabbar a{flex:1;min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:14px;text-decoration:none;color:var(--mute);font-size:.7rem;font-weight:700;-webkit-tap-highlight-color:transparent}
+.tabbar svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabbar a[aria-current=page]{color:var(--acc);background:var(--sky)}
+#sos{bottom:calc(78px + env(safe-area-inset-bottom,0px));left:10px;padding:10px 14px}
+#snack{bottom:calc(86px + env(safe-area-inset-bottom,0px))}
+#dtoast{top:calc(10px + env(safe-area-inset-top,0px))!important}
+}
 </style>
 <script>try{var t=localStorage.getItem("cd_theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
@@ -590,7 +622,7 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 <header>
 <a class="logo" href="#home" aria-label="Cloude home"><img id="mark" alt="">Cloude.</a>
 <nav class="l" aria-label="Sections">
-<a href="#actions">Digital detox</a><a href="#sync">Health sync</a><a href="index.html">Landing page</a><a href="#cloudee">Cloudee</a><a class="m" href="#insights">Research insights</a><a class="m" href="#workshops">Workshops</a>
+<a href="#actions">Digital detox</a><a href="#sync">Health sync</a><a href="index.html">Dashboard</a><a href="#cloudee">Cloudee</a><a class="m" href="#insights">Research insights</a><a class="m" href="#workshops">Workshops</a>
 </nav>
 <div class="hr"><nav class="r" aria-label="More"><a href="#insights">Research insights</a><a href="#workshops">Workshops</a></nav><button class="thm" id="thm" type="button" aria-label="Switch to dark mode" title="Dark mode">🌙</button><a class="acirc" id="hacc" href="#account" aria-label="Account" title="Account">?</a></div>
 </header>
@@ -660,7 +692,7 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 <div class="trow"><button class="btn ghost" type="button" id="dtest">Send a test notification</button><span class="pst" id="dpst" role="status"></span></div>
 <label class="switch" style="margin-top:14px"><input type="checkbox" id="dsnd" checked><span class="track"></span><span>Play a sound with notifications</span></label></div>
 </div></div>
-<div class="dnote">Cloude runs in your browser, so it counts the time you log with <b>Start</b> and <b>Stop</b> on each app, and alerts arrive while Cloude is open in a tab.</div>
+<div class="dnote"><b>On your phone:</b> install Cloude to your home screen (Share, then Add to Home Screen on iPhone; the menu, then Install app on Android) and allow notifications. Reminders, limit alerts and quiet hours then arrive as real phone notifications with vibration. Cloude counts the time you log with <b>Start</b> and <b>Stop</b>, and alerts fire while the app is open or running in the background.<div class="sbtns" style="margin-top:10px"><button class="btn" type="button" id="dinstall" hidden>Install Cloude app</button></div></div>
 </div></div></section>
 
 <section id="sync"><div class="in">
@@ -704,13 +736,13 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 <span class="av2" id="acav" aria-hidden="true">?</span><b id="acem"></b><p class="mute" id="acst" style="margin:2px 0 0"></p>
 <dl class="acl"><div><dt>Health sync</dt><dd id="achs"></dd></div><div><dt>Data storage</dt><dd id="acmode"></dd></div></dl>
 <div class="hsprompt" id="achsp" hidden><p><b>You're not using Health sync yet.</b> <span class="mute">Link your medical history so Cloude can tailor its suggestions to you. It's optional and you can switch it off any time.</span></p><a class="btn" href="#sync" id="acuse">Use Health sync</a></div>
-<div class="sbtns"><a class="btn" href="#sync" id="acsync">Manage Health sync</a><a class="btn ghost" href="index.html" id="aclanding">Back to landing page</a><button class="btn ghost" type="button" data-out id="acout">Sign out</button></div>
+<div class="sbtns"><a class="btn" href="#sync" id="acsync">Manage Health sync</a><a class="btn ghost" href="index.html" id="aclanding">Back to Dashboard</a><button class="btn ghost" type="button" data-out id="acout">Sign out</button></div>
 </div>
 <div class="accol">
 <div class="accard" id="acedit" hidden><h3>Profile</h3><p class="mute" style="margin:0 0 12px;font-size:.92rem">How you appear in Cloude.</p>
 <label class="f" for="acname" style="margin-top:0">Display name</label>
 <input type="text" id="acname" maxlength="40" autocomplete="name" placeholder="Your name">
-<div class="sbtns"><button class="btn" type="button" id="acsave">Save name</button><button class="btn ghost" type="button" id="acpick">Change photo</button><button class="btn ghost" type="button" id="acrmpic" hidden>Remove photo</button></div>
+<div class="sbtns"><button class="btn" type="button" id="acsave">Save name</button><button class="btn ghost" type="button" id="acpick">Change photo</button><button class="btn ghost" type="button" id="acadj" hidden>Adjust photo</button><button class="btn ghost" type="button" id="acrmpic" hidden>Remove photo</button></div>
 <input type="file" id="acfile" accept="image/*" hidden>
 <div class="acsub">Sign-in details</div>
 <div class="sbtns" style="margin-top:0"><button class="btn ghost" type="button" id="acpw">Change password</button><button class="btn ghost" type="button" id="acchem">Change email</button></div>
@@ -792,6 +824,13 @@ html[data-theme=dark] #dtoast{background:#243a5a;color:#fff}
 <div id="dtoast" popover="manual" role="status"></div>
 <div id="snack" role="status" aria-live="polite"></div>
 <button id="sos" type="button" aria-haspopup="dialog">♥ Need help now?</button>
+<dialog id="picd" aria-label="Adjust photo"><h2>Adjust photo</h2>
+<div class="peview"><canvas id="pecv" width="300" height="300"></canvas></div>
+<p class="mute" style="margin:8px 0 0;font-size:.88rem">Drag the photo to reposition it.</p>
+<label class="f" for="pez">Zoom</label><input type="range" id="pez" min="100" max="400" value="100">
+<div class="trow"><label>Width (px)<input type="number" id="pew" min="64" max="512" value="256"></label><label>Height (px)<input type="number" id="peh" min="64" max="512" value="256"></label></div>
+<div class="pchips" id="perat"><button type="button" data-w="256" data-h="256">Square</button><button type="button" data-w="240" data-h="320">Portrait</button><button type="button" data-w="320" data-h="240">Landscape</button></div>
+<div class="sbtns"><button class="btn" type="button" id="pesave">Save photo</button><button class="btn ghost" type="button" id="pecancel">Cancel</button></div></dialog>
 <dialog id="sosd" aria-labelledby="sostitle"><h2 id="sostitle">You're not alone</h2>
 <p class="mute" style="margin:0">If you're struggling, these free helplines in India are open day and night. You don't have to be in crisis to call.</p>
 <a class="sosrow" href="tel:14416"><span><strong>Tele-MANAS</strong><br>Government mental health helpline, 24/7</span><b>14416</b></a>
@@ -886,7 +925,7 @@ function renderAccount(){
  const e=U&&U.email,nm=(P&&P.full_name)||(U&&((U.user_metadata&&U.user_metadata.full_name)||LS.g("cd_name_"+U.id)))||"",lab=nm||e,pic=U?B.pic(U):null;
  $("acem").textContent=lab||"Not signed in";$("acav").textContent=lab?lab[0].toUpperCase():"?";
  [$("acav"),$("hacc")].forEach(x=>{x.classList.toggle("img",!!pic);x.style.backgroundImage=pic?"url("+pic+")":""});
- $("acedit").hidden=!U;$("acrmpic").hidden=!pic;if(U&&document.activeElement!==$("acname"))$("acname").value=nm;
+ $("acedit").hidden=!U;$("acrmpic").hidden=!pic;$("acadj").hidden=!pic;styleAv(pic);if(U&&document.activeElement!==$("acname"))$("acname").value=nm;
  $("acst").textContent=e?(nm?e:"Signed in"):"Sign in from Health sync to save your history to a profile.";
  $("achs").textContent=H?H.length+(H.length==1?" item":" items")+" synced":"Not linked";
  $("acmode").textContent=B.live?"Your Cloude profile":"Demo mode, this browser only";
@@ -906,13 +945,31 @@ $("acsave").onclick=async()=>{if(!U)return;const n=$("acname").value.trim(),m=$(
  m.textContent="Saving…";try{await B.setName(U,n);m.textContent="Name saved.";snack("Saved");await renderSync()}catch(x){m.textContent=x.message||"Could not save your name."}};
 $("acname").onkeydown=e=>{if(e.key=="Enter")$("acsave").click()};
 $("acpick").onclick=()=>$("acfile").click();
-$("acfile").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f||!U)return;const m=$("acemsg");
- if(!/^image\//.test(f.type)){m.textContent="Choose an image file.";return}
- const img=new Image(),url=URL.createObjectURL(f);
- img.onload=()=>{const S=160,c=document.createElement("canvas");c.width=c.height=S;const k=Math.max(S/img.width,S/img.height),w=img.width*k,h=img.height*k;
-  c.getContext("2d").drawImage(img,(S-w)/2,(S-h)/2,w,h);URL.revokeObjectURL(url);
-  B.setPic(U,c.toDataURL("image/jpeg",.85));m.textContent="Photo updated.";snack("Photo updated");renderAccount()};
- img.onerror=()=>{URL.revokeObjectURL(url);m.textContent="That image could not be read."};img.src=url};
+const pe={img:null,z:1,ox:0,oy:0};
+function peDims(){const g=i=>Math.min(512,Math.max(64,Math.round(+$(i).value)||256));return[g("pew"),g("peh")]}
+function peRender(c,cw,ch){const g=c.getContext("2d"),i=pe.img,k=Math.max(cw/i.width,ch/i.height)*pe.z,dw=i.width*k,dh=i.height*k;
+ g.fillStyle="#000";g.fillRect(0,0,cw,ch);g.drawImage(i,(cw-dw)/2+pe.ox*(dw-cw)/2,(ch-dh)/2+pe.oy*(dh-ch)/2,dw,dh)}
+function peSize(){const[w,h]=peDims(),k=300/Math.max(w,h),c=$("pecv");c.width=Math.round(w*k);c.height=Math.round(h*k);peRender(c,c.width,c.height)}
+function peOpen(src,dim,rev){const i=new Image();i.onload=()=>{if(rev)URL.revokeObjectURL(src);pe.img=i;pe.z=1;pe.ox=pe.oy=0;$("pez").value=100;$("pew").value=dim?dim[0]:256;$("peh").value=dim?dim[1]:256;peSize();$("picd").showModal()};
+ i.onerror=()=>{$("acemsg").textContent="That image could not be read."};i.src=src}
+function picDim(){try{return JSON.parse(localStorage.getItem("cd_picdim_"+U.id))}catch(e){return null}}
+function styleAv(pic){const a=$("acav"),d=U&&pic?picDim():null;if(!d){a.style.width=a.style.height=a.style.borderRadius="";return}
+ const s=120,w=d[0],h=d[1];a.style.width=(w>=h?s:s*w/h)+"px";a.style.height=(h>=w?s:s*h/w)+"px";a.style.borderRadius=w==h?"50%":"22px"}
+$("acfile").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f||!U)return;
+ if(!/^image\//.test(f.type)){$("acemsg").textContent="Choose an image file.";return}peOpen(URL.createObjectURL(f),null,true)};
+$("acadj").onclick=()=>{const p=U&&B.pic(U);if(p)peOpen(p,picDim(),false)};
+$("pez").oninput=e=>{pe.z=e.target.value/100;peSize()};
+["pew","peh"].forEach(i=>{$(i).oninput=peSize;$(i).onchange=()=>{const d=peDims();$("pew").value=d[0];$("peh").value=d[1];peSize()}});
+$("perat").onclick=e=>{const b=e.target.closest("button");if(!b)return;$("pew").value=b.dataset.w;$("peh").value=b.dataset.h;peSize()};
+(()=>{const c=$("pecv");let dr=null;c.onpointerdown=e=>{dr={x:e.clientX,y:e.clientY};c.setPointerCapture(e.pointerId);c.style.cursor="grabbing"};
+ c.onpointermove=e=>{if(!dr)return;const r=c.getBoundingClientRect(),sx=c.width/r.width,i=pe.img,k=Math.max(c.width/i.width,c.height/i.height)*pe.z,ow=(i.width*k-c.width)/2,oh=(i.height*k-c.height)/2;
+  if(ow>.5)pe.ox=Math.max(-1,Math.min(1,pe.ox+(e.clientX-dr.x)*sx/ow));if(oh>.5)pe.oy=Math.max(-1,Math.min(1,pe.oy+(e.clientY-dr.y)*sx/oh));dr={x:e.clientX,y:e.clientY};peRender(c,c.width,c.height)};
+ c.onpointerup=c.onpointercancel=()=>{dr=null;c.style.cursor="grab"};
+ c.onwheel=e=>{e.preventDefault();pe.z=Math.max(1,Math.min(4,pe.z-e.deltaY/600));$("pez").value=Math.round(pe.z*100);peSize()}})();
+$("pecancel").onclick=()=>$("picd").close();
+$("pesave").onclick=()=>{if(!U)return;const[w,h]=peDims(),o=document.createElement("canvas");o.width=w;o.height=h;peRender(o,w,h);
+ try{localStorage.setItem("cd_picdim_"+U.id,JSON.stringify([w,h]))}catch(e){}
+ B.setPic(U,o.toDataURL("image/jpeg",.88));$("picd").close();$("acemsg").textContent="Photo updated.";snack("Photo updated");renderAccount()};
 $("acrmpic").onclick=()=>{if(!U)return;B.setPic(U,null);$("acemsg").textContent="Photo removed.";renderAccount()};
 const dad=$("delacc");
 const daStep=n=>{$("dastep1").hidden=n!=1;$("dastep2").hidden=n!=2};
@@ -1037,7 +1094,11 @@ function toast(t,b){const el=$("dtoast");el.innerHTML="<b>"+esc(t)+"</b>"+esc(b|
 let ac;const unlock=()=>{try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state=="suspended")ac.resume()}catch(e){}};
 addEventListener("pointerdown",unlock);addEventListener("keydown",unlock);
 function chime(){try{unlock();if(!ac)return;const t=ac.currentTime;[[880,0],[1175,.18],[1568,.36]].forEach(([f,d])=>{const o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(0,t+d);g.gain.linearRampToValueAtTime(.25,t+d+.02);g.gain.exponentialRampToValueAtTime(.001,t+d+.5);o.connect(g);g.connect(ac.destination);o.start(t+d);o.stop(t+d+.55)})}catch(e){}}
-function notify(t,b,tag){toast(t,b);if(S.snd!==false)chime();if(S.ok&&"Notification" in window&&Notification.permission=="granted"){try{new Notification(t,{body:b,tag,requireInteraction:true,silent:false})}catch(e){}}}
+async function pushNative(t,b,tag){const o={body:b,tag,icon:"icon-192.png",badge:"icon-192.png",vibrate:[200,100,200],renotify:true,requireInteraction:true,data:{url:"signin.html#actions"}};
+ try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}
+ try{const r=await navigator.serviceWorker.getRegistration();if(r&&r.showNotification){await r.showNotification(t,o);return}}catch(e){}
+ try{new Notification(t,o)}catch(e){}}
+function notify(t,b,tag){toast(t,b);if(S.snd!==false)chime();if(S.ok&&"Notification" in window&&Notification.permission=="granted"){try{pushNative(t,b,tag)}catch(e){}}}
 $("dtoast").onclick=hide;
 
 /* limits */
@@ -1382,6 +1443,22 @@ const _sh=show;show=function(id){_sh(id);if(id==="account"){acs.scrollTop=0;setT
  document.documentElement.style.overflow='hidden';
  sp.addEventListener('animationend',function(e){if(e.animationName==='splashOut')done()});
  sp.addEventListener('click',done);setTimeout(done,4000);
+})();
+</script>
+<script>
+(function(){const I=p=>'<svg viewBox="0 0 24 24" aria-hidden="true">'+p+'</svg>',T=[
+["index.html","Dashboard",I('<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>')],
+["#actions","Detox",I('<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>')],
+["#sync","Health",I('<path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.7A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/>')],
+["#cloudee","Cloudee",I('<path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5.5A8 8 0 1 1 21 12z"/>')],
+["#account","Account",I('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>')]];
+const n=document.createElement("nav");n.className="tabbar";n.setAttribute("aria-label","App tabs");
+n.innerHTML=T.map(t=>'<a href="'+t[0]+'">'+t[2]+'<span>'+t[1]+'</span></a>').join("");document.body.appendChild(n);
+const mark=()=>{const h=location.hash||"#home";n.querySelectorAll("a").forEach(a=>a.getAttribute("href")==h?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"))};
+addEventListener("hashchange",mark);mark();
+let dip;const ib=document.getElementById("dinstall");addEventListener("beforeinstallprompt",e=>{e.preventDefault();dip=e;if(ib)ib.hidden=false});
+if(ib)ib.onclick=async()=>{if(!dip)return;dip.prompt();try{await dip.userChoice}catch(e){}dip=null;ib.hidden=true};
+if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 })();
 </script>
 </body>
