@@ -639,11 +639,15 @@ body.quiet .ann{display:none}
 </div>
 
 <dialog id="delacc" aria-labelledby="datitle"><div style="padding:28px">
-<h2 id="datitle">Delete your account?</h2>
-<p>This permanently deletes your Cloude account and any synced medical history. This can't be undone.</p>
-<label class="f" for="dacpw">Type DELETE to confirm</label><input type="text" id="dacpw" autocomplete="off">
+<div id="dastep1"><h2 id="datitle">Delete your account?</h2>
+<p><b>Warning:</b> this permanently deletes your Cloude account and any synced medical history. This can't be undone.</p>
+<div class="row"><button class="btn ghost" type="button" id="dacno">Cancel</button><button class="btn danger solid" type="button" id="dacont">Yes, continue</button></div></div>
+<div id="dastep2" hidden><h2 id="datitle2">Confirm your password</h2>
+<p>Enter your password to finish deleting your account.</p>
+<label class="f" for="dacpw">Password</label><input type="password" id="dacpw" autocomplete="current-password">
 <p id="damsg" role="status" class="ok" style="min-height:1.4em"></p>
-<div class="row"><button class="btn ghost" type="button" id="dacno">Cancel</button><button class="btn danger solid" type="button" id="dacyes" disabled>Delete account</button></div></div></dialog>
+<div class="row"><button class="btn ghost" type="button" id="dacno2">Cancel</button><button class="btn danger solid" type="button" id="dacyes" disabled>Delete my account</button></div></div>
+</div></dialog>
 <dialog id="dcons" aria-labelledby="dctitle"><div style="padding:28px">
 <h2 id="dctitle">Allow Digital detox?</h2>
 <p>Digital detox will manage your screen time on this device. It tracks the time on the apps you choose, sends you reminders and limit alerts, and applies your quiet hours. Your browser will also ask to show notifications.</p>
@@ -750,6 +754,8 @@ $("gnext").onclick=()=>{gi++;gdraw()};
 const SUPABASE_URL="https://seggtcscckgzhbafkeie.supabase.co",SUPABASE_ANON_KEY="sb_publishable_5TsD9nzzdLB84R3ADgSyJA_JHCU-KD0";
 // Where your login page (index.html) lives. People who are not signed in are sent here, and Sign out returns here. Example: "/index.html" or "https://your-login-site.com/"
 const LOGIN_URL="";
+// Where people go after Sign out or after deleting their account.
+const LANDING_URL="index.html";
 const sb=(SUPABASE_URL&&SUPABASE_ANON_KEY&&window.supabase)?supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
 const esc=x=>String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const LS={g:k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},s:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},d:k=>{try{localStorage.removeItem(k)}catch(e){}}};
@@ -772,6 +778,8 @@ const B={
   await new Promise(r=>setTimeout(r,600));return DEMO_HISTORY},
  async save(u,h){if(sb){const{error}=await sb.from("medical_history").upsert({user_id:u.id,history:h,updated_at:new Date().toISOString()},{onConflict:"user_id"});if(error)throw error;return}LS.s("cd_hist_"+u.id,h)},
  async load(u){if(sb){const{data}=await sb.from("medical_history").select("history").eq("user_id",u.id).maybeSingle();return data?data.history:null}return LS.g("cd_hist_"+u.id)},
+ async verifyPassword(u,p){if(sb){const{error}=await sb.auth.signInWithPassword({email:u.email,password:p});if(error)throw new Error("Incorrect password.");return}
+  const a=LS.g("cd_acc_"+u.email);if(!a||a.p!==p)throw new Error("Incorrect password.")},
  async wipe(u){if(sb){await sb.from("medical_history").delete().eq("user_id",u.id)}else LS.d("cd_hist_"+u.id)},
  // Deletes history, profile and the login itself. Supabase needs the delete_user() SQL function (see the note in the reply) because the browser cannot delete an auth user directly.
  async deleteAccount(u){if(sb){await sb.from("medical_history").delete().eq("user_id",u.id);try{await sb.from("profiles").delete().eq("id",u.id)}catch(e){}
@@ -805,7 +813,7 @@ async function auth(up){const e=$("aem").value.trim(),p=$("apw").value,m=$("amsg
   m.textContent="";$("apw").value="";await renderSync()}catch(x){m.textContent=x.message||"Something went wrong."}}
 $("aform").onsubmit=e=>{e.preventDefault();auth(false)};
 $("asignup").onclick=()=>auth(true);
-document.querySelectorAll("[data-out]").forEach(b=>b.onclick=async()=>{await B.signOut();await renderSync();if(LOGIN_URL)location.href=LOGIN_URL});
+document.querySelectorAll("[data-out]").forEach(b=>b.onclick=async()=>{try{await B.signOut()}catch(e){}U=null;location.replace(LANDING_URL)});
 $("acsave").onclick=async()=>{if(!U)return;const n=$("acname").value.trim(),m=$("acemsg");
  if(!n){m.textContent="Enter a name first.";return}
  m.textContent="Saving…";try{await B.setName(U,n);m.textContent="Name saved.";await renderSync()}catch(x){m.textContent=x.message||"Could not save your name."}};
@@ -820,13 +828,18 @@ $("acfile").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f||!U)r
  img.onerror=()=>{URL.revokeObjectURL(url);m.textContent="That image could not be read."};img.src=url};
 $("acrmpic").onclick=()=>{if(!U)return;B.setPic(U,null);$("acemsg").textContent="Photo removed.";renderAccount()};
 const dad=$("delacc");
-$("acdel").onclick=()=>{$("dacpw").value="";$("dacyes").disabled=true;$("damsg").textContent="";dad.showModal();$("dacpw").focus()};
-$("dacpw").oninput=e=>{$("dacyes").disabled=e.target.value.trim()!=="DELETE"};
-$("dacno").onclick=()=>dad.close();
+const daStep=n=>{$("dastep1").hidden=n!=1;$("dastep2").hidden=n!=2};
+$("acdel").onclick=()=>{daStep(1);$("dacpw").value="";$("dacyes").disabled=true;$("damsg").textContent="";dad.showModal()};
+$("dacont").onclick=()=>{daStep(2);$("dacpw").focus()};
+$("dacpw").oninput=e=>{$("dacyes").disabled=!e.target.value};
+$("dacpw").onkeydown=e=>{if(e.key=="Enter"&&!$("dacyes").disabled)$("dacyes").click()};
+$("dacno").onclick=$("dacno2").onclick=()=>dad.close();
 dad.addEventListener("click",e=>{if(e.target===dad)dad.close()});
-$("dacyes").onclick=async()=>{if(!U||$("dacpw").value.trim()!=="DELETE")return;
- $("dacyes").disabled=true;$("damsg").textContent="Deleting…";
- try{await B.deleteAccount(U);dad.close();await renderSync();show("home");if(LOGIN_URL)location.href=LOGIN_URL}
+$("dacyes").onclick=async()=>{const pw=$("dacpw").value;if(!U||!pw)return;
+ $("dacyes").disabled=true;$("damsg").textContent="Checking…";
+ try{await B.verifyPassword(U,pw)}catch(x){$("damsg").textContent=x.message||"Incorrect password.";$("dacyes").disabled=false;return}
+ $("damsg").textContent="Deleting…";
+ try{await B.deleteAccount(U);try{await B.signOut()}catch(e){}U=null;location.replace(LANDING_URL)}
  catch(x){$("damsg").textContent=x.message||"Something went wrong.";$("dacyes").disabled=false}};
 $("pform").onsubmit=async e=>{e.preventDefault();
  if(!["fn","ln","em","pw"].every(i=>$(i).value.trim())){$("smsg").textContent="Fill in every field to connect.";return}
