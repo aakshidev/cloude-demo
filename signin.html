@@ -611,6 +611,60 @@ input,select,textarea{font-size:16px!important}
 #snack{bottom:calc(86px + env(safe-area-inset-bottom,0px))}
 #dtoast{top:calc(10px + env(safe-area-inset-top,0px))!important}
 }
+
+/* ===== Compact profile + polish + motion ===== */
+#account h2{font-size:clamp(1.5rem,3vw,2rem)}#account .lead{font-size:.92rem;margin-top:.2rem}
+#account .accard{padding:16px 18px;border-radius:20px;box-shadow:0 12px 30px -20px rgba(23,48,79,.45)}
+#account .accard h3{font-size:1.15rem}#account .mute,#account .acsub{font-size:.8rem!important}
+#account .acme b{font-size:.98rem}#account .acl{font-size:.85rem;margin:14px 0 2px}#account .acl div{padding:8px 0}
+#account .btn{padding:7px 15px;font-size:.8rem;min-height:36px}
+#account .acnav button{padding:5px 12px;font-size:.78rem;min-height:34px}
+#account label.f{font-size:.82rem;margin-top:10px}
+#account input[type=text],#account input[type=email],#account input[type=password]{padding:9px 12px;font-size:.9rem}
+#account .sbtns{gap:7px;margin-top:12px}#account .devrow{padding:8px 12px}
+.acme{background:linear-gradient(180deg,var(--sky),var(--pale) 60%)}
+.acme .av2{width:80px;height:80px;font-size:2.4rem;transition:transform .35s cubic-bezier(.2,.8,.2,1);animation:popIn .6s cubic-bezier(.2,1.3,.4,1) both,ring 3.2s ease-in-out infinite 1s}
+.acme .av2:hover{transform:scale(1.05) rotate(-1.5deg)}
+.acme .av2.shaped{margin-left:auto;margin-right:auto;box-shadow:0 0 0 4px var(--sky),0 14px 30px -12px rgba(23,48,79,.5);animation:popIn .6s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.4) rotate(-8deg)}to{opacity:1;transform:none}}
+@keyframes ring{0%,100%{box-shadow:0 0 0 4px var(--sky),0 0 0 4px rgba(63,111,168,0)}50%{box-shadow:0 0 0 4px var(--sky),0 0 0 11px rgba(63,111,168,.14)}}
+@keyframes viewIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes floaty{to{transform:translateY(-8px) rotate(3deg)}}
+@keyframes dlgIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes bdIn{from{opacity:0}to{opacity:1}}
+@keyframes tabPop{0%{transform:scale(.7)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes livedot{0%{box-shadow:0 0 0 0 rgba(31,157,85,.5)}100%{box-shadow:0 0 0 9px rgba(31,157,85,0)}}
+.views>section.on:not(#home){animation:viewIn .5s cubic-bezier(.2,.8,.2,1)}
+#account .accol>.accard,#acdz>.accard,#account .acme,#actions .card,#sync .card{animation:riseIn .65s cubic-bezier(.2,.8,.2,1) both}
+#account .accol>.accard:nth-child(2),#acdz>.accard:nth-child(2),#actions .dtgrid .card:nth-child(2){animation-delay:.08s}
+#account .accol>.accard:nth-child(3),#actions .dtgrid .card:nth-child(3){animation-delay:.16s}
+#account .accol>.accard:nth-child(4),#actions .dtgrid .card:nth-child(4){animation-delay:.24s}
+.btn{transition:transform .18s,box-shadow .25s,background .2s,color .2s,border-color .2s}
+.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(63,111,168,.7)}
+.btn:active:not(:disabled){transform:scale(.95);box-shadow:none}
+.btn.ghost:hover:not(:disabled){background:var(--sky)}
+.accard,.dtc,.dtben div{transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.accard:hover,.dtc:hover{transform:translateY(-3px);box-shadow:0 18px 34px -20px rgba(23,48,79,.55)}
+.dtben div:hover{transform:translateY(-3px)}
+.dthero .ico{animation:floaty 3s ease-in-out infinite alternate}
+.dtpill.on{position:relative;padding-left:26px}.dtpill.on:before{content:"";position:absolute;left:11px;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:#1f9d55;animation:livedot 1.4s infinite}
+.chip,.pchips button,.scs button,.acnav button,.mrow button{transition:transform .15s,background .2s,border-color .2s,color .2s}
+.chip:active,.pchips button:active,.acnav button:active{transform:scale(.93)}
+nav a{transition:background .25s,color .25s,transform .15s}nav a:hover{transform:translateY(-1px)}
+dialog[open]{animation:dlgIn .38s cubic-bezier(.2,.9,.3,1.1)}dialog[open]::backdrop{animation:bdIn .3s}
+.tabbar{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(12px)}
+.tabbar a{transition:transform .15s,background .25s,color .25s}.tabbar a:active{transform:scale(.88)}
+.tabbar a[aria-current=page] svg{animation:tabPop .45s cubic-bezier(.2,1.4,.4,1)}
+@media(max-width:700px){#account .btn{min-height:38px}.acme .av2{width:72px;height:72px}}
+
+.mood[hidden],.mlpick[hidden]{display:none}
+.mll li{flex-wrap:wrap;align-items:center}
+.mlchg{margin-left:auto;border:1.5px solid var(--acc);background:transparent;color:var(--acc);border-radius:99px;padding:3px 12px;font-size:.78rem;font-weight:700;cursor:pointer;transition:background .2s,color .2s,transform .15s}
+.mlchg:hover{background:var(--acc);color:var(--on)}.mlchg:active{transform:scale(.93)}
+.mlpick{width:100%;display:flex;gap:6px;margin:4px 0 2px;animation:riseIn .3s both}
+.mlpick button{flex:1;font-size:1.4rem;line-height:1;padding:8px 0;border-radius:12px;border:1.5px solid var(--line);background:var(--pale);cursor:pointer;transition:transform .15s,background .2s}
+.mlpick button:hover{transform:translateY(-2px) scale(1.08)}.mlpick button[aria-pressed=true]{border-color:var(--acc);background:var(--sky)}
 </style>
 <script>try{var t=localStorage.getItem("cd_theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
@@ -953,8 +1007,9 @@ function peSize(){const[w,h]=peDims(),k=300/Math.max(w,h),c=$("pecv");c.width=Ma
 function peOpen(src,dim,rev){const i=new Image();i.onload=()=>{if(rev)URL.revokeObjectURL(src);pe.img=i;pe.z=1;pe.ox=pe.oy=0;$("pez").value=100;$("pew").value=dim?dim[0]:256;$("peh").value=dim?dim[1]:256;peSize();$("picd").showModal()};
  i.onerror=()=>{$("acemsg").textContent="That image could not be read."};i.src=src}
 function picDim(){try{return JSON.parse(localStorage.getItem("cd_picdim_"+U.id))}catch(e){return null}}
-function styleAv(pic){const a=$("acav"),d=U&&pic?picDim():null;if(!d){a.style.width=a.style.height=a.style.borderRadius="";return}
- const s=120,w=d[0],h=d[1];a.style.width=(w>=h?s:s*w/h)+"px";a.style.height=(h>=w?s:s*h/w)+"px";a.style.borderRadius=w==h?"50%":"22px"}
+function styleAv(pic){const a=$("acav"),d=U&&pic?(picDim()||[160,160]):null,x=a.style;
+ if(!d){x.width=x.height=x.aspectRatio=x.borderRadius="";a.classList.remove("shaped");return}
+ a.classList.add("shaped");x.width="min("+d[0]+"px,100%)";x.height="auto";x.aspectRatio=d[0]+"/"+d[1];x.borderRadius="20px"}
 $("acfile").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f||!U)return;
  if(!/^image\//.test(f.type)){$("acemsg").textContent="Choose an image file.";return}peOpen(URL.createObjectURL(f),null,true)};
 $("acadj").onclick=()=>{const p=U&&B.pic(U);if(p)peOpen(p,picDim(),false)};
@@ -1308,7 +1363,7 @@ function streakOf(m){let n=0;const d=new Date();if(!m[dk(d)])d.setDate(d.getDate
 function renderMood(){const m=LS.g(mk())||{},today=m[dk(new Date())],row=$("mrow");
  if(!row.children.length)EM.forEach((x,i)=>{const b=document.createElement("button");b.type="button";b.textContent=x[0];b.setAttribute("aria-label",x[1]);b.onclick=()=>{const d=LS.g(mk())||{};d[dk(new Date())]=i;LS.s(mk(),d);renderMood();snack("Mood saved "+x[0])};row.appendChild(b)});
  [...row.children].forEach((b,i)=>b.setAttribute("aria-pressed",String(today===i)));
- $("mtitle").textContent=today===undefined?"How are you feeling today?":"Thanks for checking in";
+ $("mood").hidden=today!==undefined;$("mtitle").textContent=today===undefined?"How are you feeling today?":"Thanks for checking in";
  const n=streakOf(m);$("mst").textContent=n?"🔥 "+n+"-day streak":"Start your streak today";
  let w="";for(let k=6;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);const v=m[dk(d)];w+=v===undefined?"·":EM[v][0]}$("mweek").textContent=w}
 const _ra=renderAccount;renderAccount=function(){_ra();renderMood()};renderMood();
@@ -1416,11 +1471,14 @@ function renderMoodLog(){const m=LS.g(mk())||{},now=new Date(),first=new Date(ml
  const top=Object.keys(tally).sort((a,b)=>tally[b]-tally[a])[0];
  $("mlsum").textContent=cnt?cnt+(cnt==1?" check-in":" check-ins")+" this month · most often "+EM[top][0]+" "+EM[top][1]:"No check-ins this month yet. Pick an emoji at the top of this page.";
  const ks=Object.keys(m).filter(k=>EM[m[k]]).sort().reverse().slice(0,5);
- $("mllist").innerHTML=ks.length?ks.map(k=>{const a=k.split("-"),dt=new Date(+a[0],+a[1]-1,+a[2]);return"<li><span>"+dt.toLocaleDateString(undefined,{weekday:"short",day:"numeric",month:"short"})+"</span><b>"+EM[m[k]][0]+" "+EM[m[k]][1]+"</b></li>"}).join(""):'<li class="mute">Nothing logged yet.</li>';
- $("mlnext").disabled=mlY===now.getFullYear()&&mlM===now.getMonth()}
+ $("mllist").innerHTML=ks.length?ks.map(k=>{const a=k.split("-"),dt=new Date(+a[0],+a[1]-1,+a[2]);return"<li><span>"+dt.toLocaleDateString(undefined,{weekday:"short",day:"numeric",month:"short"})+"</span><b>"+EM[m[k]][0]+" "+EM[m[k]][1]+"</b>"+(k===todayK?'<button type="button" class="mlchg">Change</button><div class="mlpick" hidden>'+EM.map((x,i)=>'<button type="button" data-i="'+i+'" aria-label="'+x[1]+'"'+(i===m[k]?' aria-pressed="true"':'')+'>'+x[0]+'</button>').join("")+'</div>':"")+"</li>"}).join(""):'<li class="mute">Nothing logged yet.</li>';
+ $("mlnext").disabled=mlY===now.getFullYear()&&mlM===now.getMonth();{const n=streakOf(m);if(n)$("mlsum").textContent+=" · 🔥 "+n+"-day streak"}}
 $("mlprev").onclick=()=>{mlM--;if(mlM<0){mlM=11;mlY--}renderMoodLog()};
 $("mlnext").onclick=()=>{mlM++;if(mlM>11){mlM=0;mlY++}renderMoodLog()};
 const _rm=renderMood;renderMood=function(){_rm();renderMoodLog()};renderMoodLog();
+$("mllist").onclick=e=>{const c=e.target.closest(".mlchg"),p=e.target.closest(".mlpick button");
+ if(c){const k=c.nextElementSibling;k.hidden=!k.hidden;c.textContent=k.hidden?"Change":"Cancel";return}
+ if(p){const i=+p.dataset.i,d=LS.g(mk())||{};d[dk(new Date())]=i;LS.s(mk(),d);renderMood();snack("Today's mood changed to "+EM[i][0])}};
 </script>
 <script>
 /* ===== Account dashboard: section chips, scroll-spy, back to top ===== */
